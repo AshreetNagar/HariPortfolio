@@ -9,7 +9,8 @@ dotenv.config();
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/hariportfolio', {
+mongoDbUrl = process.env.MONGODB_URL
+mongoose.connect(mongoDbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
