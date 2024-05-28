@@ -1,0 +1,26 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Hari's Portfolio</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <h1>Gallery</h1>
+    <div class="card-container">
+        <% mediaItems.forEach(media => { %>
+            <div class="card">
+                <h2><%= media.title %></h2>
+                <p><%= media.tags.join(', ') %></p>
+                <% if (media.type === 'video') { %>
+                    <video src="<%= media.link %>" controls></video>
+                <% } else { %>
+                    <img src="<%= media.link %>" alt="<%= media.title %>">
+                <% } %>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>
