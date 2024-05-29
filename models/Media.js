@@ -15,7 +15,7 @@ const MediaSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['video', 'image'],
+        enum: ['video', 'image', 'youtube_embed'],
         required: true,
     },
     link: {
