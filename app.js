@@ -12,10 +12,14 @@ dotenv.config();
 const app = express();
 
 // Connect to MongoDB
-mongoDbUrl = process.env.MONGODB_URL
+const mongoDbUrl = process.env.MONGODB_URL;
 mongoose.connect(mongoDbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
+}).then(() => {
+    console.log('MongoDB connected...');
+}).catch(err => {
+    console.error('MongoDB connection error:', err);
 });
 
 // Middleware
@@ -35,9 +39,11 @@ app.set('view engine', 'ejs');
 // Routes
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
 app.use('/', indexRouter);
 app.use('/', authRouter);
-  
+app.use('/admin', adminRouter);
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
