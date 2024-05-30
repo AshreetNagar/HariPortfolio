@@ -57,4 +57,15 @@ router.post('/edit/:id', ensureAuthenticated, async (req, res) => {
     }
 });
 
+// Delete Card
+router.post('/delete/:id', ensureAuthenticated, async (req, res) => {
+    try {
+        await Media.findByIdAndDelete(req.params.id);
+        res.redirect('/admin/dashboard');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;
