@@ -1,0 +1,4 @@
+MONGODB_URL="mongodb+srv://firstnamelastnameshut:MnNR3nlFdzICCVZV@hportfolio-dev.gc3clpn.mongodb.net/?retryWrites=true&w=majority&appName=hportfolio-dev"
+EMAIL_USER="adfrhnhgkgbggbbj@gmail.com"
+EMAIL_PASS="dobu hrsw iztf xekc"
+JWT_KEY = "secretKey"

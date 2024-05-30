@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <a href="/admin/add">Add Card</a>
+    <ul>
+        <% mediaItems.forEach(item => { %>
+            <li>
+                <%= item.title %>
+                <a href="/admin/edit/<%= item._id %>">Edit</a>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>
