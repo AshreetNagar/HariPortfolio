@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <script>
+        function confirmDelete(id) {
+            if (confirm('Are you sure you want to delete this card? This action cannot be undone.')) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <a href="/admin/add">Add Card</a>
+    <ul>
+        <% mediaItems.forEach(item => { %>
+            <li>
+                <%= item.title %>
+                <a href="/admin/edit/<%= item._id %>">Edit</a>
+                <form id="delete-form-<%= item._id %>" action="/admin/delete/<%= item._id %>" method="POST" style="display:inline;">
+                    <button type="button" onclick="confirmDelete('<%= item._id %>')">Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+    <form action="/logout" method="post">
+        <button class="logout" type="submit">Sign out</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Hari's Portfolio</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <h1>Admin Login</h1>
+    <form action='<%= process.env.LOGIN_URL %>' method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" autocomplete="username" required>
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" autocomplete="password" required>
+        <label><%=err%></label>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
