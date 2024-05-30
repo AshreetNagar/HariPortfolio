@@ -27,7 +27,7 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
 
 // Login
 router.post('/login', passport.authenticate('local', {
-    successRedirect: '/gallery',
+    successRedirect: '/admin/dashboard',
     failureRedirect: '/login'
   }));
 

@@ -18,7 +18,8 @@
         
         <label for="type">Type:</label>
         <select name="type" id="type" required>
-            <option value="video" <%= mediaItem.type === 'video' ? 'selected' : '' %>>Video</option>
+            <option value="youtube_embed" <%= mediaItem.type === 'youtube_embed' ? 'selected' : '' %>>Youtube Video</option>
+            <option value="video" <%= mediaItem.type === 'video' ? 'selected' : '' %>>Video File</option>
             <option value="image" <%= mediaItem.type === 'image' ? 'selected' : '' %>>Image</option>
         </select>
         
