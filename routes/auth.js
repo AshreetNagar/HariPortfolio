@@ -5,7 +5,7 @@ var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
 const Auth = require('../models/Auth');
 
-router.get('/login',(req,res) => {
+router.get(process.env.LOGIN_URL,(req,res) => {
     res.render('login',{err:''})
 });
 
@@ -26,9 +26,9 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   }));
 
 // Login
-router.post('/login', passport.authenticate('local', {
+router.post(process.env.LOGIN_URL, passport.authenticate('local', {
     successRedirect: '/admin/dashboard',
-    failureRedirect: '/login'
+    failureRedirect: process.env.LOGIN_URL
   }));
 
   passport.serializeUser(function(user, cb) {
@@ -42,6 +42,15 @@ router.post('/login', passport.authenticate('local', {
       return cb(null, user);
     });
   });
+
+
+  router.post('/logout', function(req, res, next) {
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+    });
+    });
+    
 
 
 module.exports = router;

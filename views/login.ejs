@@ -9,7 +9,7 @@
 <body>
     <%- include('partials/navbar') %>
     <h1>Admin Login</h1>
-    <form action="/login" method="POST">
+    <form action='<%= process.env.LOGIN_URL %>' method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" autocomplete="username" required>
         <label for="password">Password:</label>

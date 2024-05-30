@@ -3,7 +3,7 @@ function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/login');
+    res.redirect(process.env.LOGIN_URL);
 }
 
 module.exports = ensureAuthenticated;
