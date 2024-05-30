@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 const Media = require('../models/Media');
-const Auth = require('../models/Auth');
-const jwt = require("jsonwebtoken"); 
-const crypto = require('crypto');
 
 // Home page route
 router.get('/', (req, res) => {
@@ -58,51 +55,56 @@ router.post('/contact', async (req, res) => {
     }
 });
 
-router.get('/login',(req,res) => {
-    res.render('login',{err:''})
+
+
+
+router.post('/logout', function(req, res, next) {
+req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+});
 });
 
-// Login
-router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        //Check password
-        user = await Auth.find({userID:username})
-        if(user.length != 1){
-            res.render('login', {err:'Incorrect Username'});
-            return 
-        }
-        salt = user[0].salt
-        hashedpw = Buffer.from(user[0].hashedpw,'base64')
-        jwtSecretKey = process.env.JWT_KEY
-        crypto.pbkdf2(password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
-            if (err) { 
-                res.render('login', {'err':err});
-                return                
-            }
-            if (!crypto.timingSafeEqual(hashedpw, hashedPassword)) {
-                res.render('login', {err:'Incorrect Password'});
-                return 
-            }
-            // Generate JWT if passed
-            const token = jwt.sign({ userId: username }, jwtSecretKey, { expiresIn: "2h" });
-            console.log(token)
-            res.redirect('/gallery');
-            return;
-            // Verifying the token
-            jwt.verify(token, "secretKey", (err, decoded) => {
-                if (err) {
-                    console.log("Error verifying json: "+err)
-                } else {
-                    console.log("New token: "+token)
-                }
-            });
-        });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
-    }
-});
+// router.post('/login', async (req, res) => {
+//     const { username, password } = req.body;
+//     try {
+//         //Check password
+//         user = await Auth.find({userID:username})
+//         if(user.length != 1){
+//             res.render('login', {err:'Incorrect Username'});
+//             return 
+//         }
+//         salt = user[0].salt
+//         hashedpw = Buffer.from(user[0].hashedpw,'base64')
+//         jwtSecretKey = process.env.JWT_KEY
+//         crypto.pbkdf2(password, salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+//             if (err) { 
+//                 res.render('login', {'err':err});
+//                 return                
+//             }
+//             if (!crypto.timingSafeEqual(hashedpw, hashedPassword)) {
+//                 res.render('login', {err:'Incorrect Password'});
+//                 return 
+//             }
+//             // Generate JWT if passed
+//             const token = jwt.sign({ userId: username }, jwtSecretKey, { expiresIn: "2h" });
+//             console.log(token)
+//             res.redirect('/gallery');
+//             return;
+//             // Verifying the token
+//             jwt.verify(token, "secretKey", (err, decoded) => {
+//                 if (err) {
+//                     console.log("Error verifying json: "+err)
+//                 } else {
+//                     console.log("New token: "+token)
+//                 }
+//             });
+//         });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send('Server Error');
+//     }
+// });
 
 
 module.exports = router;
