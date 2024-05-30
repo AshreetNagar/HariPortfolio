@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - Hari's Portfolio</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/gallery.css">
 </head>
 <body>
     <%- include('partials/navbar') %>
     <h1>Gallery</h1>
     <div class="card-container">
         <% mediaItems.forEach(media => { %>
-            <div class="card">
-                <h2><%= media.title %></h2>
-                <p><%= media.tags.join(', ') %></p>
+            <div class="card" >
+                <h2 class="card-title"><%= media.title %></h2>
+                <p class="card-tags"><%= media.tags.join(', ') %></p>
                 <% if (media.type === 'video') { %>
                     <video src="<%= media.link %>" controls></video>
                 <% } else if (media.type === 'image') { %>
