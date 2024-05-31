@@ -4,23 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - Hari's Portfolio</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <link rel="stylesheet" href="/css/styles.css"> -->
     <link rel="stylesheet" href="/css/gallery.css">
 </head>
 <body>
-    <%- include('partials/navbar') %>
-    <h1>Gallery</h1>
+    <!-- <%- include('partials/navbar') %> -->
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <h1>Gallery</h1>
+    </header>
     <div class="section-card-container">
         <div class="section-card">
-            <img src="https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2013/08/1.-Moraine_final.jpg">
+            <a href="https://tdbank.com">
+                <img src="https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2013/08/1.-Moraine_final.jpg">
+            </a>
             <div class="section-card-title">
-                <p >DANCE</p>
+                <a href="https://tdbank.com">
+                    <p class="section-card-p">DANCE</p>
+                </a>
             </div>
         </div>
         <div class="section-card">
-            <img src="https://media.istockphoto.com/id/1368628035/photo/brooklyn-bridge-at-sunset.jpg?s=612x612&w=0&k=20&c=hPbMbTYRAVNYWAUMkl6r62fPIjGVJTXzRURCyCfoG08=">
+            <a href="https://cibc.com">
+                <img src="https://media.istockphoto.com/id/1368628035/photo/brooklyn-bridge-at-sunset.jpg?s=612x612&w=0&k=20&c=hPbMbTYRAVNYWAUMkl6r62fPIjGVJTXzRURCyCfoG08=">
+            </a>
             <div class="section-card-title">
-                <p >WEDDINGS?</p>
+                <a href="https://cibc.com">
+                    <p class="section-card-p">WEDDINGS?</p>
+                </a>
             </div>
         </div>
     </div>
