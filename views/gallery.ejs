@@ -10,20 +10,19 @@
 <body>
     <%- include('partials/navbar') %>
     <h1>Gallery</h1>
-    <div class="card-container">
-        <% mediaItems.forEach(media => { %>
-            <div class="card" >
-                <h2 class="card-title"><%= media.title %></h2>
-                <p class="card-tags"><%= media.tags.join(', ') %></p>
-                <% if (media.type === 'video') { %>
-                    <video src="<%= media.link %>" controls></video>
-                <% } else if (media.type === 'image') { %>
-                    <img src="<%= media.link %>" alt="<%= media.title %>">
-                <% } else { %>
-                    <iframe width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe> 
-                <% } %>
+    <div class="section-card-container">
+        <div class="section-card">
+            <img src="https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2013/08/1.-Moraine_final.jpg">
+            <div class="section-card-title">
+                <p >DANCE</p>
             </div>
-        <% }) %>
+        </div>
+        <div class="section-card">
+            <img src="https://media.istockphoto.com/id/1368628035/photo/brooklyn-bridge-at-sunset.jpg?s=612x612&w=0&k=20&c=hPbMbTYRAVNYWAUMkl6r62fPIjGVJTXzRURCyCfoG08=">
+            <div class="section-card-title">
+                <p >WEDDINGS?</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>
