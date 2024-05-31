@@ -1,19 +1,26 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const videos = document.querySelectorAll(".video-player");
-    let currentVideoIndex = 0;
+const rotatingImages = document.querySelector('.rotating-images');
+const images = rotatingImages.querySelectorAll('img');
+const totalImages = images.length;
 
-    videos[currentVideoIndex].play();
+let currentIndex = 0;
+const pauseTime = 3000; // Time to pause on each image (in milliseconds)
+const rotateTime = 1000; // Time to rotate to the next image (in milliseconds)
 
-    videos.forEach((video, index) => {
-        video.addEventListener("ended", () => {
-            currentVideoIndex = (index + 1) % videos.length;
-            videos[currentVideoIndex].play();
-        });
+function rotateImages() {
+    rotatingImages.style.transition = `transform ${rotateTime}ms ease`;
+    currentIndex = (currentIndex + 1) % totalImages;
+    rotatingImages.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-        video.addEventListener("click", () => {
-            videos.forEach(v => v.pause());
-            currentVideoIndex = index;
-            videos[currentVideoIndex].play();
-        });
-    });
-});
+    if (currentIndex === totalImages - 1) {
+        setTimeout(() => {
+            rotatingImages.style.transition = 'none'; // Disable transition for reset
+            rotatingImages.style.transform = `translateX(0)`; // Reset to first image
+            currentIndex = 0;
+            setTimeout(rotateImages, pauseTime); // Wait for pause time before next rotation
+        }, rotateTime);
+    } else {
+        setTimeout(rotateImages, pauseTime + rotateTime); // Continue normal rotation
+    }
+}
+
+setTimeout(rotateImages, pauseTime); // Initial delay before starting rotation
