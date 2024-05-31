@@ -11,13 +11,16 @@ function rotateImages() {
     currentIndex = (currentIndex + 1) % totalImages;
     rotatingImages.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-    if (currentIndex === totalImages - 1) {
+    if (currentIndex === totalImages - 4) {
         setTimeout(() => {
             rotatingImages.style.transition = 'none'; // Disable transition for reset
             rotatingImages.style.transform = `translateX(0)`; // Reset to first image
             currentIndex = 0;
-            setTimeout(rotateImages, pauseTime); // Wait for pause time before next rotation
-        }, rotateTime);
+            setTimeout(() => {
+                rotatingImages.style.transition = `transform ${rotateTime}ms ease`; // Re-enable transition
+                rotateImages();
+            }, pauseTime); // Wait for pause time before next rotation
+        }, rotateTime + pauseTime);
     } else {
         setTimeout(rotateImages, pauseTime + rotateTime); // Continue normal rotation
     }
