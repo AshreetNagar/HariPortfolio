@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #121212;
+    background: linear-gradient(to bottom, #121212, #1E1E1E);
     color: #FFFFFF;
     margin: 0;
     padding: 0;
@@ -57,8 +57,8 @@ main {
     margin-bottom: 40px;
     background-color: #2D2D2D;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .contact-info p, .contact-info a {
@@ -66,13 +66,46 @@ main {
     font-size: 1.2em;
 }
 
+.divider {
+    position: relative;
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background: #BB86FC;
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.divider span {
+    display: inline-block;
+    background: #1E1E1E;
+    padding: 0 10px;
+    color: #BB86FC;
+}
+
 .contact-form {
     width: 80%;
     max-width: 800px;
     background-color: #2D2D2D;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    margin-top: 20px;
 }
 
 .contact-form form {
@@ -111,22 +144,17 @@ main {
     font-size: 1em;
     transition: background-color 0.3s ease;
     resize: vertical;
-    height: 150px;
+    height: 200px;
 }
-
 
 .contact-form textarea:focus {
     background-color: #505050;
     outline: none;
 }
 
-.contact-form h2 {
-    text-align: center;
-}
-
 .contact-form button {
     margin-top: 20px;
-    padding: 15px 20px; 
+    padding: 15px 30px;
     background-color: #BB86FC;
     cursor: pointer;
     font-size: 1.1em;
@@ -135,9 +163,8 @@ main {
     color: #FFFFFF;
     transition: background-color 0.3s ease;
     width: fit-content;
-    align-self: center; 
+    align-self: center;
 }
-
 
 .contact-form button:hover {
     background-color: #9B63D1;
@@ -146,35 +173,50 @@ main {
 footer {
     background-color: #1E1E1E;
     padding: 20px;
+    position: relative;
+    overflow: hidden;
     text-align: center;
+    height: 300px;
 }
 
-footer .social-media a {
-    color: #BB86FC;
-    margin: 0 10px;
-    text-decoration: none;
-    font-size: 1.2em;
-}
-
-footer .social-media a:hover {
-    color: #9B63D1;
-}
-
-footer .gallery {
+footer .rotating-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    transition: transform 1s ease;
+    z-index: 0;
 }
 
-footer .gallery img {
-    width: 100px;
-    height: 100px;
-    margin: 0 10px;
-    border-radius: 5px;
+footer .rotating-images img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
 }
 
-footer .gallery img:hover {
-    transform: scale(1.1);
+footer .social-media {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+footer .social-media-box {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px 40px;
+    border-radius: 10px;
+}
+
+footer .social-media-box a {
+    color: #BB86FC;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+footer .social-media-box a:hover {
+    color: #9B63D1;
 }
