@@ -1,29 +1,61 @@
-const rotatingImages = document.querySelector('.rotating-images');
-const images = rotatingImages.querySelectorAll('img');
-const totalImages = images.length;
+// Load the Google APIs Client Library
+gapi.load('client:auth2', initClient);
 
-let currentIndex = 0;
-const pauseTime = 3000; // Time to pause on each image (in milliseconds)
-const rotateTime = 1000; // Time to rotate to the next image (in milliseconds)
-
-function rotateImages() {
-    rotatingImages.style.transition = `transform ${rotateTime}ms ease`;
-    currentIndex = (currentIndex + 1) % totalImages;
-    rotatingImages.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-    if (currentIndex === totalImages - 4) {
-        setTimeout(() => {
-            rotatingImages.style.transition = 'none'; // Disable transition for reset
-            rotatingImages.style.transform = `translateX(0)`; // Reset to first image
-            currentIndex = 0;
-            setTimeout(() => {
-                rotatingImages.style.transition = `transform ${rotateTime}ms ease`; // Re-enable transition
-                rotateImages();
-            }, pauseTime); // Wait for pause time before next rotation
-        }, rotateTime + pauseTime);
-    } else {
-        setTimeout(rotateImages, pauseTime + rotateTime); // Continue normal rotation
-    }
+function initClient() {
+    gapi.client.init({
+        apiKey: 'YOUR_API_KEY', // Replace with your API key
+        clientId: 'YOUR_CLIENT_ID', // Replace with your Client ID
+        discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+        scope: 'https://www.googleapis.com/auth/calendar.readonly'
+    }).then(() => {
+        // List upcoming events
+        listUpcomingEvents();
+    });
 }
 
-setTimeout(rotateImages, pauseTime); // Initial delay before starting rotation
+function listUpcomingEvents() {
+    gapi.client.calendar.events.list({
+        'calendarId': 'primary',
+        'timeMin': (new Date()).toISOString(),
+        'showDeleted': false,
+        'singleEvents': true,
+        'maxResults': 10,
+        'orderBy': 'startTime'
+    }).then(response => {
+        const events = response.result.items;
+        const calendarDiv = document.getElementById('calendar');
+
+        if (events.length > 0) {
+            events.forEach(event => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'event';
+                eventDiv.innerText = `${event.summary} (${event.start.dateTime || event.start.date})`;
+                eventDiv.addEventListener('click', () => {
+                    openModal(event);
+                });
+                calendarDiv.appendChild(eventDiv);
+            });
+        } else {
+            calendarDiv.innerText = 'No upcoming events found.';
+        }
+    });
+}
+
+function openModal(event) {
+    const modal = document.getElementById('contactFormModal');
+    modal.style.display = 'block';
+    // Populate form with event details if needed
+}
+
+const modal = document.getElementById('contactFormModal');
+const closeModal = document.getElementsByClassName('close')[0];
+
+closeModal.onclick = function() {
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+}
