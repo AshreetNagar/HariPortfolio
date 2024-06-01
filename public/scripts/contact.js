@@ -3,11 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        googleCalendarApiKey: 'YOUR_GOOGLE_CALENDAR_API_KEY', // Add your API key here
-        events: {
-            googleCalendarId: 'YOUR_CALENDAR_ID', // Add your Calendar ID here
-            className: 'gcal-event' // Add custom class to events
-        },
+        // plugins: [ googleCalendarPlugin ],
+        googleCalendarApiKey: 'AIzaSyAg2J9vQ9x3vaK3CaFJcgTjZwcochKDbSc', // Add your API key here
+        events: 'firstname.lastname.shut@gmail.com',
+        // events: 'calendar.google.com/calendar/u/1?cid=Zmlyc3RuYW1lLmxhc3RuYW1lLnNodXRAZ21haWwuY29t',
+        // events: {
+        //     googleCalendarId: 'firstname.lastname.shut@gmail.com', // Add your Calendar ID here
+        //     className: 'gcal-event' // Add custom class to events
+        // },
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
