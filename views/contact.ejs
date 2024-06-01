@@ -54,6 +54,10 @@
                         <option value="Instagram">Instagram</option>
                         <option value="Recommendation">Recommendation</option>
                     </select>
+                    <label for="timestart">Time Start:</label>
+                    <input type="time" id="timestart" onchange=validTimeCheck()>
+                    <label for="timeend">Time End:</label>
+                    <input type="time" id="timeend" onchange=validTimeCheck()>
                     <button type="submit">Send Message</button>
                 </form>
             </div>

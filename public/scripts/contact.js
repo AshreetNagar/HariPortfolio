@@ -1,4 +1,11 @@
 var calendar = ""
+var selectedDay = ""
+
+function isRealValue(obj)
+{
+    return obj && obj !== 'null' && obj !== 'undefined';
+}
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const calendarEl = document.getElementById('calendar');
@@ -23,10 +30,12 @@ document.addEventListener('DOMContentLoaded', function() {
             info.jsEvent.preventDefault();
         },
         dateClick: function(info) {
-            console.log(info)
-            openModal("", "");
-            IsDateHasEvent(info)
-            
+            var today = new Date()
+            if (info.date>today){
+                selectedDay = info.date
+                openModal("", "");
+                // IsDateHasEvent(info)    
+            }            
             // Grayed out days if fully booked logic can be added here
         }
     });
@@ -35,8 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
       
     function IsDateHasEvent(date) {
         var allEvents = [];
-        allEvents = calendar
+        allEvents = calendar.currentData.eventStore.instances
         console.log(allEvents)
+        Object.keys(allEvents).forEach(calEventKey => {
+            calEvent = allEvents[calEventKey]
+            console.log(calEvent)
+        });
         // var event = $.grep(allEvents, function (v) {
         //     return v.start === date;
         // });
@@ -62,3 +75,80 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+function validTimeCheck(){
+    const startTimeInput = document.getElementById('timestart').valueAsDate;
+    const endTimeInput = document.getElementById('timeend').valueAsDate;
+    const startEmpty = !isRealValue(startTimeInput)
+    const endEmpty = !isRealValue(endTimeInput)
+    var allEvents = calendar.currentData.eventStore.instances
+    
+    // console.log(startEmpty)
+    // console.log(endEmpty)
+
+    // if both are null, do nothing
+    if (startEmpty && endEmpty){
+        return
+    }
+
+    // if one is null but the other isnt, make sure date isnt within existing ranges
+    else if (!startEmpty && endEmpty){
+        var newStartDate = new Date(selectedDay.getTime())
+        newStartDate.setHours(startTimeInput.getHours())
+        newStartDate.setMinutes(startTimeInput.getMinutes())    
+
+        Object.keys(allEvents).forEach(calEventKey => {
+            calEvent = allEvents[calEventKey]
+            if ((calEvent.range.start < newStartDate) &&( newStartDate < calEvent.range.end)){
+                alert("no")
+                document.getElementById('timestart').value = ""
+            }
+        });
+        return
+    }
+    else if (startEmpty && !endEmpty){
+        var newEndDate = new Date(selectedDay.getTime())
+        newEndDate.setHours(endTimeInput.getHours())
+        newEndDate.setMinutes(endTimeInput.getMinutes())    
+
+        Object.keys(allEvents).forEach(calEventKey => {
+            calEvent = allEvents[calEventKey]
+            if ((calEvent.range.start < newEndDate) &&( newEndDate < calEvent.range.end)){
+                alert("no")
+                document.getElementById('timeend').value = ""
+            }
+        });
+        return
+    }
+    
+    // if both present, regular range conflict
+    else {
+        var newStartDate = new Date(selectedDay.getTime())
+        newStartDate.setHours(startTimeInput.getHours())
+        newStartDate.setMinutes(startTimeInput.getMinutes())  
+        var newEndDate = new Date(selectedDay.getTime())
+        newEndDate.setHours(endTimeInput.getHours())
+        newEndDate.setMinutes(endTimeInput.getMinutes())    
+        // invalid if ends before starts
+        if (newStartDate>=newEndDate){
+            alert("end time must be after start time")
+            document.getElementById('timeend').value = ""
+        }
+        // range overlap: valid if starts after existing ends / ends before existing starts
+        Object.keys(allEvents).forEach(calEventKey => {
+            calEvent = allEvents[calEventKey]
+            if (!((newStartDate>calEvent.range.end) || (newEndDate<calEvent.range.start))){
+                alert("no")
+                document.getElementById('timestart').value = ""
+                document.getElementById('timeend').value = ""
+            }
+        });
+    }
+
+    var newStartDate = new Date(selectedDay.getTime())
+    newStartDate.setHours(startTimeInput.getHours())
+    newStartDate.setMinutes(startTimeInput.getMinutes())    
+    console.log(newStartDate)
+
+
+}
