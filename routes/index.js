@@ -19,6 +19,19 @@ router.get('/gallery', async (req, res) => {
     }
 });
 
+router.get('/GalleryPages', async (req, res) => {
+    try {
+        console.log(req.query.page)
+        const mediaItems = await Media.find();
+        res.render('gallerypages', { mediaItems, page:req.query.page });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+
+
 // Contact page route
 router.get('/contact', (req, res) => {
     res.render('contact');
