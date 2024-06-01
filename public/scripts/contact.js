@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         // plugins: [ googleCalendarPlugin ],
-        googleCalendarApiKey: 'AIzaSyAg2J9vQ9x3vaK3CaFJcgTjZwcochKDbSc', // Add your API key here
+        googleCalendarApiKey: 'AIzaSyCl3MxjwR0UYF8yEAj4rhOZ9HKvdbwqwUU', // Add your API key here
         events: 'firstname.lastname.shut@gmail.com',
         // events: 'calendar.google.com/calendar/u/1?cid=Zmlyc3RuYW1lLmxhc3RuYW1lLnNodXRAZ21haWwuY29t',
         // events: {
