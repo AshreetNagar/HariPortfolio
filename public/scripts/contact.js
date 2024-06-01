@@ -29,6 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // openModal(info.event.start, info.event.end);
             info.jsEvent.preventDefault();
         },
+        eventContent: function (arg) {
+            var event = arg.event;
+            const eventText = "Busy"
+            var customHtml = '';
+            customHtml += "<span class='r10 highlighted-badge font-xxs font-bold clearColour'>" + eventText + "</span>";
+
+            return { html: customHtml }
+        },
         dateClick: function(info) {
             var today = new Date()
             if (info.date>today){
@@ -41,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     calendar.render();
-      
+
     function IsDateHasEvent(date) {
         var allEvents = [];
         allEvents = calendar.currentData.eventStore.instances
@@ -74,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'none';
         }
     }
+
 });
 
 function validTimeCheck(){

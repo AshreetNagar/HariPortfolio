@@ -189,3 +189,7 @@ footer .social-media-box a {
 footer .social-media-box a:hover {
     color: #9B63D1;
 }
+
+.clearColour{
+    color: black;
+}
