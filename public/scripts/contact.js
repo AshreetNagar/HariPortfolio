@@ -20,11 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
             openModal(info.event.start, info.event.end);
         },
         dateClick: function(info) {
+            console.log(info)
+            openModal("", "");
+
             // Grayed out days if fully booked logic can be added here
         }
     });
 
     calendar.render();
+      
 
     function openModal(start, end) {
         const modal = document.getElementById('contactFormModal');
