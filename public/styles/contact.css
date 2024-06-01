@@ -82,6 +82,40 @@ main {
     color: white; /* Ensure text is visible on dark background */
 }
 
+.fc-theme-standard .fc-scrollgrid, .fc-theme-standard td, .fc-theme-standard th {
+    border-color: #BB86FC; /* Border color for calendar */
+}
+
+.fc-button-primary {
+    background-color: #BB86FC;
+    border: none;
+}
+
+.fc-button-primary:hover {
+    background-color: #9B63D1;
+}
+
+.fc-daygrid-day-number {
+    color: #BB86FC;
+}
+
+.fc-toolbar-title {
+    color: #BB86FC;
+}
+
+.fc-day-today {
+    background-color: rgba(187, 134, 252, 0.1); /* Highlight today */
+}
+
+.fc-event {
+    background-color: #BB86FC;
+    border: 1px solid #BB86FC;
+}
+
+.fc-event:hover {
+    background-color: #9B63D1;
+}
+
 .modal {
     display: none;
     position: fixed;
