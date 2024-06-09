@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <!-- <link rel="stylesheet" href="/css/styles.css"> -->
     <link rel="stylesheet" href="/css/gallerypages.css">
 </head>
+
 <body>
     <!-- <%- include('partials/navbar') %> -->
     <header>
@@ -17,64 +19,96 @@
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
-        <h1><%=page %></h1>
+        <h1>
+            <%=page %>
+        </h1>
     </header>
     <div class="card-container">
-        <% mediaItems.forEach(function(media,idx){ id2="card"+idx %>
+        <% mediaItems.forEach(function(media,idx){ id2="card" +idx %>
             <div class="card" id='<%= id2 %>' onclick="myFunction('<%= idx %>')">
-                <% if (media.type === 'video') { %>
+                <% if (media.type==='video' ) { %>
                     <video src="<%= media.link %>"></video>
-                <% } else if (media.type === 'image') { %>
+                <% } else if (media.type==='image' ) { %>
                     <img src="<%= media.link %>" alt="<%= media.title %>">
                 <% } else { %>
-                    <iframe width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe> 
+                    <iframe width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe>
                 <% } %>
             </div>
         <% }) %>
     </div>
     <% mediaItems.forEach(function(media,idx){ %>
         <div class="popupMedia" id="<%= idx %>">
-            <% if (media.type === 'video') { %>
-                <video src="<%= media.link %>" controls></video>
-            <% } else if (media.type === 'image') { %>
+            <% if (media.type==='video' ) { %>
+                <video src="<%= media.link %>" controls id="popupVid<%= idx %>"></video>
+            <% } else if (media.type==='image' ) { %>
                 <img src="<%= media.link %>" alt="<%= media.title %>">
             <% } else { %>
-                <iframe width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe> 
+                <div id="ytPopup<%= idx %>">
+                    <iframe width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe>
+                </div>
             <% } %>
             <p onclick="closePopup('<%= idx %>')">close</p>
         </div>
-    <% }) %>    
+    <% }) %>
 </body>
 
 <script>
-    document.querySelector('video').addEventListener('click', (e) => {
-        e.preventDefault()
-        console.log("hi")
-        
-    })
-    // <% mediaItems.forEach(function(media,idx){ id2="card"+idx %>
-    //     // Get arbitrary element with id "my-element"
-    //     var myElementToCheckIfClicksAreInsideOf = document.querySelector('#<%= id2 %>');
-    //     console.log(myElementToCheckIfClicksAreInsideOf)
-    //     // Listen for click events on body
-    //     document.body.addEventListener('click', function (event) {
-    //         if (myElementToCheckIfClicksAreInsideOf.contains(event.target)) {
-    //             console.log('clicked inside');
-    //         } else {
-    //             console.log('clicked outside');
-    //         }
-    //     });
-    // <% }) %>    
+
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var playerArr = [];
+    playerIdx = 0;
+    function onYouTubeIframeAPIReady() {
+        <% mediaItems.forEach(function (media, idx) { id2 = "card" + idx %>
+        var player2 = ""
+        <% if (media.type === 'youtube_embed') { %>
+            var player = new YT.Player('<%= id2 %>', {
+                videoId: '<%= media.yt_id %>',
+                playerVars: {
+                    'playsinline': 1
+                },
+                events: {
+                    'onStateChange': function (event) {
+                        if (event.data == YT.PlayerState.PLAYING) {
+                            console.log(event)
+                            event.target.stopVideo();
+                            console.log("click?")
+                            myFunction('<%= idx %>')
+                        }
+                    }
+                }
+            })
+            player2 = new YT.Player('ytPopup<%= idx %>', {
+                videoId: '<%= media.yt_id %>',
+                playerVars: {
+                    'playsinline': 1
+                },
+            })
+        <% } %>
+        playerArr.push(player2)
+        <% }) %>
+    }
 
     // When the user clicks on <div>, open the popup
     function myFunction(title) {
-      var popup = document.getElementById(title);
-      popup.style.display = "block";
+        var popup = document.getElementById(title);
+        popup.style.display = "block";
     }
-    function closePopup(title){
+
+    function closePopup(title) {
         var popup = document.getElementById(title);
         popup.style.display = "none";
+        if(document.getElementById("popupVid" + title) != null){
+            document.getElementById("popupVid" + title).pause();
+        }
+        if(playerArr[title] != ""){
+            playerArr[title].pauseVideo()
+        }
     }
+
 </script>
 
 </html>

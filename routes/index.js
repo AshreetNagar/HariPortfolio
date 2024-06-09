@@ -21,8 +21,24 @@ router.get('/gallery', async (req, res) => {
 
 router.get('/GalleryPages', async (req, res) => {
     try {
-        console.log(req.query.page)
-        const mediaItems = await Media.find();
+        var mediaItems = await Media.find();
+        // var 
+        mediaItems.forEach(element => {
+            if(element.type == 'youtube_embed'){
+                console.log(element.link)
+                var urlobj  = new URL(element.link)
+                // No search params == embed link
+                if (Array.from(urlobj.searchParams.values()) == 0){
+                    const urlpaths = (urlobj.pathname.split('/'));
+                    element.yt_id = urlpaths[urlpaths.length -1]
+                }else{
+                    // regular yt link
+                    element.yt_id = Array.from(urlobj.searchParams.values())[0]
+                }
+                console.log(element.yt_id)
+            }
+        });
+        // console.log(mediaItems)
         res.render('gallerypages', { mediaItems, page:req.query.page });
     } catch (err) {
         console.error(err);
