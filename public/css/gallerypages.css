@@ -100,26 +100,40 @@ main {
 
 
 
-video, img, iframe{
-    width:100%
-}
-
 .card-container{
     display: flex;
     flex-wrap: wrap;
+    padding-top: 1vw;
+    padding-left: 5vw;
 }
 
 .card{
-    border: 1px solid #ccc;
-    /* margin: 10px; */
+    border: #FFFFFF;
+    border-style: solid;
+
+    overflow: auto;
+
+    /* border: 1px solid #ccc; */
+    /* border-width: 0px; */
+    /* marg    overflow: auto;
+in: 10px; */
     padding: 10px;
     width: 30vh;
-    border-width: 0px;
     -webkit-transition: opacity 0.5s ease-in-out;
     -moz-transition: opacity 0.5s ease-in-out;
     -ms-transition: opacity 0.5s ease-in-out;
     -o-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
+}
+
+video {
+    /* width:100% */
+}
+img {
+    width:100%
+}
+iframe{
+    width:100%
 }
 
 
