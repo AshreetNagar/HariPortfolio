@@ -139,9 +139,14 @@ iframe{
 
 .popupMedia{
     display: none;
-    position: absolute;
-    top: 1vh;
-    padding: 10vw;
+    /* position: absolute; */
+    /* top: 1vh; */
+    /* padding: 10vw; */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
 }
 
 
