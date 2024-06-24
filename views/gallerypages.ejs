@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - Hari's Portfolio</title>
-    <!-- <link rel="stylesheet" href="/css/styles.css"> -->
+    <link rel="stylesheet" href="/css/gallerypages-common.css">
     <link rel="stylesheet" href="/css/gallerypages.css">
 </head>
 
@@ -28,28 +28,31 @@
             <% mediaItems.forEach(function(media,idx){ id2="card" +idx %>
                 <div class="card" id='<%= id2 %>' onclick="myFunction('<%= idx %>')">
                     <% if (media.type==='video' ) { %>
-                        <video src="<%= media.link %>"></video>
+                        <video class="cardMedia" src="<%= media.link %>"></video>
                     <% } else if (media.type==='image' ) { %>
-                        <img src="<%= media.link %>" alt="<%= media.title %>">
+                        <img class="cardMedia" src="<%= media.link %>" alt="<%= media.title %>">
                     <% } else { %>
-                        <iframe width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe>
+                        <iframe class="cardMedia" width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe>
                     <% } %>
                 </div>
             <% }) %>
+            <div class="card" id='card5' onclick="myFunction(5)">
+                <img class="testThumb" src="https://4kmedia.org/wp-content/uploads/2017/10/lg-new-york-1.jpg"></img>
+            </div>
         </div>
     </div>
     <% mediaItems.forEach(function(media,idx){ %>
-        <div class="popupMedia" id="<%= idx %>">
+        <div class="popupContainer" id="<%= idx %>">
             <% if (media.type==='video' ) { %>
-                <video src="<%= media.link %>" controls id="popupVid<%= idx %>"></video>
+                <video class="popupMedia" src="<%= media.link %>" controls id="popupVid<%= idx %>"></video>
             <% } else if (media.type==='image' ) { %>
-                <img src="<%= media.link %>" alt="<%= media.title %>">
+                <img class="popupMedia" src="<%= media.link %>" alt="<%= media.title %>">
             <% } else { %>
-                <div id="ytPopup<%= idx %>">
-                    <iframe width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe>
+                <div class="popupMedia" id="ytPopup<%= idx %>">
+                    <!-- <iframe class="popupMedia" width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe> -->
                 </div>
             <% } %>
-            <p onclick="closePopup('<%= idx %>')">close</p>
+            <p class="popupButton" onclick="closePopup('<%= idx %>')">close</p>
         </div>
     <% }) %>
 </body>
@@ -136,6 +139,15 @@
             }
         }, 20);
     }
+
+    document.addEventListener("dragover", function(e){
+        e = e || window.event;
+        var dragX = e.pageX, dragY = e.pageY;
+
+        console.log("X: "+dragX+" Y: "+dragY);
+    }, false);
+
+
 
 </script>
 
