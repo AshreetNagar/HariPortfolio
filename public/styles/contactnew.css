@@ -21,10 +21,12 @@ header {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .navbar li {
-    float: left;
+    margin: 0 10px;
 }
 
 .navbar li a {
@@ -33,6 +35,7 @@ header {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
 .navbar li a:hover {
@@ -54,32 +57,78 @@ main {
     width: 80%;
     max-width: 800px;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     background-color: #2D2D2D;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    position: relative;
 }
 
-.contact-info p, .contact-info a {
-    color: #FFFFFF;
+.icons-line {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    align-items: center;
+}
+
+.icons-line a, .icons-line span.contact-text {
+    color: #BB86FC;
+    transition: color 0.3s ease;
+}
+
+.icons-line a:hover {
+    color: #9B63D1;
+}
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.or-divider .line {
+    flex: 1;
+    height: 1px;
+    background-color: #BB86FC;
+}
+
+.or-divider .or {
+    margin: 0 10px;
+    color: #BB86FC;
     font-size: 1.2em;
 }
 
-.contact-info i {
-    margin-right: 10px;
+#contactFormButton {
+    background-color: #BB86FC;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#contactFormButton:hover {
+    background-color: #9B63D1;
+}
+
+.calendar-section {
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #2D2D2D;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 #calendar {
-    width: 80%;
-    max-width: 800px;
-    background-color: #2D2D2D;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    margin-top: 40px;
-    color: white; /* Ensure text is visible on dark background */
+    width: 100%;
+    color: white;
 }
 
 .fc-theme-standard .fc-scrollgrid, .fc-theme-standard td, .fc-theme-standard th {
@@ -105,7 +154,6 @@ main {
 }
 
 .fc-day-today {
-    background-color: rgba(187, 134, 252, 0.1); /* Highlight today */
     background-color: rgba(187, 134, 252, 0.1);
 }
 
@@ -126,7 +174,7 @@ main {
 .modal {
     display: none;
     position: fixed;
-    z-index: 2;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -208,14 +256,12 @@ button[type="submit"]:hover {
 
 footer {
     background-color: #1E1E1E;
-    padding: 40px 20px;
-    position: relative;
-    overflow: hidden;
+    padding: 20px;
     text-align: center;
-    height: 300px;
+    margin-top: 40px;
 }
 
-footer .social-media {
+footer .social-media {    
     position: relative;
     z-index: 1;
     display: flex;
@@ -226,23 +272,15 @@ footer .social-media {
 }
 
 footer .social-media-box {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px 40px;
-    border-radius: 10px;
-    position: relative;
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 footer .social-media-box a {
-    color: #BB86FC;
+    color: white;
     text-decoration: none;
-    font-size: 1.5em;
+    transition: color 0.3s ease;
 }
 
 footer .social-media-box a:hover {
-    color: #9B63D1;
-}
-
-.clearColour{
-    color: black;
+    color: #BB86FC;
 }
