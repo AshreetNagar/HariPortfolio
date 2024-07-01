@@ -12,7 +12,38 @@ router.get('/', (req, res) => {
 router.get('/gallery', async (req, res) => {
     try {
         const mediaItems = await Media.find();
-        res.render('gallery', { mediaItems });
+        console.log(mediaItems)
+        // res.render('gallery', { mediaItems });
+        img = "https://media.istockphoto.com/id/1368628035/photo/brooklyn-bridge-at-sunset.jpg?s=612x612&w=0&k=20&c=hPbMbTYRAVNYWAUMkl6r62fPIjGVJTXzRURCyCfoG08="
+        page = "https://www.cibc.com/en/personal-banking.html"
+        var typeList = [];
+        typeList.push({
+            name: "DANCE",
+            image: img,
+            link: "/GalleryPages?page=Dance"  
+        })
+        typeList.push({
+            name: "EVENTS",
+            image: img,
+            link: page  
+        })
+        typeList.push({
+            name: "BTS",
+            image: img,
+            link: page  
+        })
+        typeList.push({
+            name: "MUSIC",
+            image: img,
+            link: page  
+        })
+        typeList.push({
+            name: "DECOR",
+            image: img,
+            link: page  
+        })
+        res.render('gallery',{typeList});
+
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');

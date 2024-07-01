@@ -1,47 +1,89 @@
 
 .card-container{
-    display: flex;
     flex-wrap: wrap;
-    padding-top: 1vw;
-    padding-left: 5vw;
+    display: flex;
+
+    /* Horizontal alignment */
+    justify-content: center; 
+    /* Vertical alignment */
+    align-items: center; 
+
 }
 
 .card{
-    border: #FFFFFF;
-    border-style: solid;
-
-    /* overflow: auto; */
-    overflow: hidden;
-
-
-    /* border: 1px solid #ccc; */
-    /* border-width: 0px; */
-    /* marg    overflow: auto;
-in: 10px; */
-    padding: 10px;
-    width: 30vh;
-    height: 40vh;
     -webkit-transition: opacity 0.5s ease-in-out;
     -moz-transition: opacity 0.5s ease-in-out;
     -ms-transition: opacity 0.5s ease-in-out;
     -o-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
+
+    overflow: hidden;
+    /* height: 50%; */
+    width: 30vh;
+    height: 40vh;
+    padding: 5vh;
+
+}
+
+.vidcard{
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+
+    overflow: hidden;
+    /* height: 50%; */
+    padding: 5vh;
+
+    /* background-color:grey; */
+    object-fit: cover;
+
+}
+
+.ytcard{
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+
+    overflow: hidden;
+
+    /* width: 40vh; */
+    /* height: 53.3vh; */
+    width: 30vh;
+    height: 40vh;
+
+
+    padding: 5vh;
+
 }
 
 .cardMedia {
-    height:200%;
-    position: relative;
-    top: -1vw;
-    left: -10vh;
+    /* height:200%; */
+    /* clip-path: xywh(0 0px 50% 50% ); */
+
+    /* position: relative; */
+    /* top: -1vw; */
+    /* left: -10vh; */
     overflow: hidden;
+    
+
 }
 
-.testThumb{
-    /* height:200%; */
-    position: relative;
-    /* bottom: 10vw; */
-    /* right: 10vw; */
-    overflow: hidden;
+.cardVideo {
+    width: 30vh;
+    height: 40vh;
+    /* object-fit: cover; */
+    object-fit: fill;
+}
+.test1{
+    width: 30vh;
+    height: 40vh;   
+    background-position: 0 -50px; 
+    background-size: 1000px;
+
 }
 
 
@@ -76,19 +118,6 @@ in: 10px; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* .ytPopup{ */
-    /* position: absolute; */
-    /* top: 50%; */
-    /* left: 50%; */
-    /* transform: translate(-50%, -50%); */
-    /* width: 50%; /* or set a fixed width, e.g., width: 300px; */
-    /* height: auto; /* or set a fixed height, e.g., height: 200px; */
-    /* padding: 20px; */
-    /* background-color: #f0f0f0; */
-    /* border: 1px solid #ccc; */
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-
-/* } */
 
 /* 1st centered title */
 .card-title {

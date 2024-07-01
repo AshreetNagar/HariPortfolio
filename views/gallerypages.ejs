@@ -7,6 +7,8 @@
     <title>Gallery - Hari's Portfolio</title>
     <link rel="stylesheet" href="/css/gallerypages-common.css">
     <link rel="stylesheet" href="/css/gallerypages.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js" integrity="sha512-jEJ0OA9fwz5wUn6rVfGhAXiiCSGrjYCwtQRUwI/wRGEuWRZxrnxoeDoNc+Pnhx8qwKVHs2BRQrVR9RE6T4UHBg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery-bundle.min.css" integrity="sha512-nUqPe0+ak577sKSMThGcKJauRI7ENhKC2FQAOOmdyCYSrUh0GnwLsZNYqwilpMmplN+3nO3zso8CWUgu33BDag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -26,19 +28,40 @@
         </header>
         <div class="card-container">
             <% mediaItems.forEach(function(media,idx){ id2="card" +idx %>
-                <div class="card" id='<%= id2 %>' onclick="myFunction('<%= idx %>')">
-                    <% if (media.type==='video' ) { %>
-                        <video class="cardMedia" src="<%= media.link %>"></video>
-                    <% } else if (media.type==='image' ) { %>
-                        <img class="cardMedia" src="<%= media.link %>" alt="<%= media.title %>">
+                    <% if (media.type==='youtube_embed' ) { %>
+                        <div class="ytcard" id='<%= id2 %>' onclick="myFunction('<%= idx %>')">
+                            <iframe class="cardMedia" width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe>
+                        </div>
                     <% } else { %>
-                        <iframe class="cardMedia" width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe>
+                            <% if (media.type==='video' ) { %>
+                                <div class="vidcard" id='<%= id2 %>' onclick="myFunction('<%= idx %>')">
+                                    <video class="cardVideo" src="<%= media.link %>"></video>
+                                </div>
+                            <% } else if (media.type==='image' ) { %>
+                                <div class="card" id='<%= id2 %>' onclick="myFunction('<%= idx %>')">
+                                    <div style="background-image: url('<%= media.link %>');" class="test1"></div>
+                                </div>
+                            <% } %>
+                            <% if (media.type==='video' ) { %>
+                                <div class="vidcard" id='<%= id2 %>' onclick="myFunction('<%= idx %>')">
+                                    <video class="cardVideo" src="<%= media.link %>"></video>
+                                </div>
+                            <% } else if (media.type==='image' ) { %>
+                                <div class="card" id='<%= id2 %>' onclick="myFunction('<%= idx %>')">
+                                    <div style="background-image: url('<%= media.link %>');" class="test1"></div>
+                                </div>
+                            <% } %>
                     <% } %>
-                </div>
             <% }) %>
-            <div class="card" id='card5' onclick="myFunction(5)">
-                <img class="testThumb" src="https://4kmedia.org/wp-content/uploads/2017/10/lg-new-york-1.jpg"></img>
-            </div>
+        </div>
+        <div id="lightgallery">
+            <% mediaItems.forEach(function(media,idx){ id2="card" +idx %>
+                <% if (media.type==='image' ) { %>
+                    <a href="<%= media.link %>" data-lg-size="1600-2400">
+                        <img alt=".." src="<%= media.link %>" />
+                    </a>
+                <% } %>
+            <% }) %>
         </div>
     </div>
     <% mediaItems.forEach(function(media,idx){ %>
@@ -99,6 +122,7 @@
     var fadeEffect = setInterval(function(){},1000);
     // When the user clicks on <div>, open the popup
     function myFunction(title) {
+        scroll({"top":0,"left":0,"behavior":"smooth"})
         var popup = document.getElementById(title);
         clearInterval(fadeEffect);
         fadeEffect = setInterval(function () {
@@ -118,6 +142,8 @@
 
     function closePopup(title) {
         var popup = document.getElementById(title);
+        const element = document.getElementById("box");
+        console.log(title)
         popup.style.display = "none";
         if(document.getElementById("popupVid" + title) != null){
             document.getElementById("popupVid" + title).pause();
@@ -148,6 +174,10 @@
     }, false);
 
 
+    lightGallery(document.getElementById('lightgallery'), {
+        plugins: [lgZoom, lgThumbnail],
+        speed: 500,
+    });
 
 </script>
 
