@@ -42,25 +42,7 @@
                                     <div style="background-image: url('<%= media.link %>');" class="test1"></div>
                                 </div>
                             <% } %>
-                            <% if (media.type==='video' ) { %>
-                                <div class="vidcard" id='<%= id2 %>' onclick="myFunction('<%= idx %>')">
-                                    <video class="cardVideo" src="<%= media.link %>"></video>
-                                </div>
-                            <% } else if (media.type==='image' ) { %>
-                                <div class="card" id='<%= id2 %>' onclick="myFunction('<%= idx %>')">
-                                    <div style="background-image: url('<%= media.link %>');" class="test1"></div>
-                                </div>
-                            <% } %>
                     <% } %>
-            <% }) %>
-        </div>
-        <div id="lightgallery">
-            <% mediaItems.forEach(function(media,idx){ id2="card" +idx %>
-                <% if (media.type==='image' ) { %>
-                    <a href="<%= media.link %>" data-lg-size="1600-2400">
-                        <img alt=".." src="<%= media.link %>" />
-                    </a>
-                <% } %>
             <% }) %>
         </div>
     </div>
