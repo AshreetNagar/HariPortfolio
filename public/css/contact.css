@@ -1,0 +1,204 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header, footer {
+  flex-shrink: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+}
+
+.left-side {
+  background-color: #1E1E1E;
+  color: #A8A8A8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  box-shadow: 0 1vw 1.5vw 0 rgba(0, 0, 0, 0.2), 0 1vw 2vw 0 rgba(0, 0, 0, 0.19);
+  padding: 2em;
+  width: 100%;
+}
+
+.left-side .ContactUscontent {
+  text-align: center;
+  max-width: 80%;
+  animation: fadeInText 2s;
+}
+
+.left-side h1 {
+  color: #AF52DE;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.left-side p {
+  margin-bottom: 2em;
+}
+
+.contact-info a {
+  display: block;
+  margin-bottom: 1em;
+  color: #A8A8A8;
+  text-decoration: none;
+}
+
+.contact-info a i {
+  margin-right: 0.5em;
+}
+
+.right-side {
+  background-color: #FFFFFF;
+  padding: 2em;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.right-side h1 {
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.form-group {
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  padding: 0 1em;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-field {
+  flex: 1;
+  min-width: 45%;
+  box-sizing: border-box;
+}
+
+.form-field:nth-child(2) {
+  margin-left: 10%;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5em;
+  color: #000000;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #000000;
+  border-radius: 0;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+.form-row.full-width .form-field {
+  min-width: 100%;
+}
+
+.form-row.date-time .form-field {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.form-row.time-fields .form-field {
+  min-width: 45%;
+  box-sizing: border-box;
+}
+
+.form-row.time-fields .form-field:nth-child(2) {
+  margin-left: 10%;
+}
+
+.form-row.message-box .form-field {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  height: 150px;
+}
+
+.form-group .required {
+  color: red;
+}
+
+button {
+  background-color: #000000;
+  color: #FFFFFF;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button:hover {
+  background-color: #AF52DE;
+  transform: scale(1.05);
+}
+
+@keyframes fadeInText {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .left-side {
+    width: 50%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+  }
+
+  .right-side {
+    width: 50%;
+  }
+
+  .form-row.date-time .form-field,
+  .form-row.time-fields .form-field {
+    min-width: 30%;
+    margin-left: 1%;
+  }
+
+  .form-row.date-time .form-field:first-child,
+  .form-row.time-fields .form-field:first-child {
+    margin-left: 0;
+  }
+}

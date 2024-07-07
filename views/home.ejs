@@ -3,28 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Hari's Portfolio</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <title>HT Productions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
-    <%- include('partials/navbar') %>
-    <h1>Welcome to Hari's Portfolio</h1>
-    <!-- Swipable images here but there are placeholders for images-->
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="/images/image1.jpg" alt="Image 1"></div>
-            <div class="swiper-slide"><img src="/images/image2.jpg" alt="Image 2"></div>
-            <div class="swiper-slide"><img src="/images/image3.jpg" alt="Image 3"></div>
+    <header>
+        <%- include('partials/navbar') %>
+    </header>
+    <div class="carousel-container">
+        <div class="carousel">
+            <img id="image0" src="images/homeimage1.jpg" alt="Slide 1">
+            <img id="image1" src="images/homeimage2.jpg" alt="Slide 2">
+            <img id="image2" src="images/homeimage3.jpg" alt="Slide 3">
+            <img id="image3" src="images/homeimage4.jpg" alt="Slide 4">
         </div>
-        <div class="swiper-pagination"></div>
+        <div class="overlay">
+            <img src="images/LogoPurple.png" alt="HT Productions Logo" class="logo">
+            <h1>Welcome to HT Productions</h1>
+            <p>Your premier destination for videography services.</p>
+            <div class="buttons">
+                <a href="/gallery" class="button black-button">Gallery</a>
+                <a href="/contact" class="button transparent-button">Contact</a>
+            </div>
+        </div>
     </div>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            pagination: {
-                el: '.swiper-pagination',
-            },
-        });
-    </script>
+
+    <div class="about-section">
+        <div class="about-content">
+            <img src="images/hari.jpeg" alt="Our Team" class="about-image">
+            <div class="about-text">
+                <h2>About Us</h2>
+                <p>We are a team of passionate videographers dedicated to capturing your special moments. From weddings to corporate events, we provide top-notch videography services to meet your needs.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-carousel-container">
+        <div class="video-carousel">
+            <video id="video0" src="video/homevideo1.mp4" controls></video>
+            <!-- <video id="video1" src="video/homevideo2.mp4" controls></video> -->
+            <video id="video1" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" controls></video>
+            <video id="video2" src="https://filesamples.com/samples/video/mp4/sample_1280x720.mp4" controls></video>
+            <!-- <video id="video3" src="video/homevideo4.mp4" controls></video> -->
+            <video id="video3" src="https://videos.pexels.com/video-files/20708668/20708668-sd_360_640_24fps.mp4" controls></video>
+        </div>
+        <div class="view-more-button">
+            <a href="#" class="button transparent-button">View More</a>
+        </div>
+    </div>
+
+    <div class="testimonial-section">
+        <div class="stars">
+            ★★★★★
+        </div>
+        <blockquote>
+            "HT Productions exceeded our expectations. The video quality was amazing, and the team was incredibly professional."
+        </blockquote>
+        <p class="testimonial-author">John Doe, CEO of Company</p>
+    </div>
+    <footer>
+        <%- include('partials/footer.ejs') %>
+    </footer>
+    <script src="scripts/home.js"></script>
 </body>
 </html>
