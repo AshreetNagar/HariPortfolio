@@ -43,90 +43,18 @@ body {
 }
 
 
-.filter-section {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    width: 15vw;
-    top: 100px;
-    left: 10px;
-    font-family: 'Poppins', sans-serif;
-    /* border-color: black; */
-    border-color: lightgray;
-    border-width: thin;
-    border-style: groove;
-    border-top: 0;
-    border-bottom: 0;
-    border-left: 0;
-}
-
-.filter-section h3 {
-    font-weight: 100;
-}
-
-.filter-section h4 {
-    font-weight: 100;
-}
-
-.filter-section label {
-    font-weight: 100;
-}
-
-.group-searchbox {
-    width: -webkit-fill-available;
-}
-
-.active,
-.filter-group-header:hover {
-    /* background-color: #ccc; */
-    color: purple;
-}
-
-.filter-group-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5vw;
-}
-
-.filter-group-collapsible {
-    background-color: white;
-    color: #444;
-    cursor: pointer;
-    padding-right: 1vw;
-    border: none;
-    text-align: right;
-    outline: none;
-    font-size: smaller;
-    margin: 0 0 10px;
-}
-
-.filter-group-content {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-}
-
-.filter-divider {
-    border-color: lightgray;
-    border-width: thin;
-    border-style: groove;
-    border-top: 0;
-}
-
-
-
 .pictures-sections {
     display: flex;
     /* flex-direction: column; */
     justify-content: space-around;
     padding: 4%;
+
 }
 
 .pictures-grid {
     display: grid;
     grid-template-columns: 33% 33% 33%;
+
 }
 
 .picture-card {
@@ -139,11 +67,11 @@ body {
     background-size: cover;
     background-origin: content-box;
     background-clip: content-box;
-    /* padding: 3%;  */
+    padding: 3%;
 
     /* bootstrap carryovers */
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-/* Hover card */
+.picture-card-container {}

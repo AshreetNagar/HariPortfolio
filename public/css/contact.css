@@ -15,6 +15,8 @@ header, footer {
   flex-direction: column;
   width: 100%;
   flex: 1;
+  align-items: center;
+  overflow: hidden;
 }
 
 .left-side {
@@ -23,11 +25,14 @@ header, footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 25px;
-  box-shadow: 0 1vw 1.5vw 0 rgba(0, 0, 0, 0.2), 0 1vw 2vw 0 rgba(0, 0, 0, 0.19);
   padding: 2em;
   width: 100%;
+  box-shadow: 0 1vw 1.5vw 0 rgba(0, 0, 0, 0.2), 0 1vw 2vw 0 rgba(0, 0, 0, 0.19);
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
 }
 
 .left-side .ContactUscontent {
@@ -66,6 +71,11 @@ header, footer {
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: -25px;
+  position: relative;
+  z-index: 1;
+  border-top-left-radius: 25px;
+  box-sizing: border-box;
 }
 
 .right-side h1 {
@@ -178,6 +188,8 @@ button:hover {
 @media (min-width: 768px) {
   .container {
     flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
   }
 
   .left-side {
@@ -189,6 +201,8 @@ button:hover {
 
   .right-side {
     width: 50%;
+    margin-top: 0;
+    border-top-left-radius: 25px;
   }
 
   .form-row.date-time .form-field,
@@ -200,5 +214,23 @@ button:hover {
   .form-row.date-time .form-field:first-child,
   .form-row.time-fields .form-field:first-child {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .left-side {
+    height: 70vh;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+
+  .right-side {
+    margin-top: -25px;
+    border-top-left-radius: 0;
   }
 }

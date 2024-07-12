@@ -36,7 +36,6 @@ body {
 }
 
 .overlay {
-
     position: absolute;
     top: 0;
     left: 0;
@@ -132,6 +131,17 @@ p {
 .about-text p {
     font-size: 1.2em;
     color: #333;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-image, .about-text {
+        width: 100%;
+    }
 }
 
 .video-carousel-container {

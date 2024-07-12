@@ -19,6 +19,18 @@ router.get('/gallery', async (req, res) => {
     }
 });
 
+
+router.get('/GalleryCategories', async (req, res) => {
+    try {
+        res.render('gallerycategories');
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+
 // Contact page route
 router.get('/contact', (req, res) => {
     res.render('contact');

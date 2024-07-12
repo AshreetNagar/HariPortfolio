@@ -1,29 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - Hari's Portfolio</title>
-    <link rel="stylesheet" href="/css/oldstyles.css">
     <link rel="stylesheet" href="/css/gallery.css">
+    <!-- <link rel="stylesheet" href="/css/gallery.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="scripts/gallery.js"></script>
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <script src="scripts/snapshot.modernizr.custom.js.js"></script>
+    
 </head>
+
 <body>
-    <%- include('partials/navbar') %>
-    <h1>Gallery</h1>
-    <div class="card-container">
-        <% mediaItems.forEach(media => { %>
-            <div class="card" >
-                <h2 class="card-title"><%= media.title %></h2>
-                <p class="card-tags"><%= media.tags.join(', ') %></p>
-                <% if (media.type === 'video') { %>
-                    <video src="<%= media.link %>" controls></video>
-                <% } else if (media.type === 'image') { %>
-                    <img src="<%= media.link %>" alt="<%= media.title %>">
-                <% } else { %>
-                    <iframe width="420" height="315" src="<%= media.link %>" alt="<%= media.title %>"></iframe> 
-                <% } %>
+    <header>
+        <%- include('partials/navbar') %>
+    </header>
+
+    <div class="main-content">
+        <div class="animate__animated animate__fadeIn intro-section">
+            <h1>DECOR GALLERY</h1>
+            <p>The quick brown fox jumps over the lazy yellow dog. The quick brown lorem ipsum jumps over the lazy yellow dolor sit.</p>
+        </div>
+        <div class="pictures-sections">
+            <div class="pictures-grid">
+                <div class="picture-card-container">
+                    <div class="picture-card" style="background-image: url('images/gallery/img1.jpg')"></div>
+                </div>
+
+                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/gallery/img2.jpg')"></div></div>
+                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/gallery/img3.jpg')"></div></div>
+                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/gallery/img4.jpg')"></div></div>
+                
+                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/galleryv2/img1-tall.jpeg')"></div></div>
+                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/galleryv2/img2-wide.jpg')"></div></div>
+                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/galleryv2/img3-squareish.jpg')"></div></div>
+
+                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/homeimage1.jpg')"></div></div>
+                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/homeimage2.jpg')"></div></div>
+                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/homeimage3.jpg')"></div></div>
+                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/homeimage4.jpg')"></div></div>
+                
             </div>
-        <% }) %>
+        </div>
     </div>
+    <footer>
+        <%- include('partials/footer.ejs') %>
+    </footer>
 </body>
+
 </html>
+
+
