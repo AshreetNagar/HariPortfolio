@@ -18,14 +18,22 @@
     <div class="main-content">
         <div class="intro-section">
             <h1>GALLERY CATEGORIES</h1>
-            <p>The quick brown fox jumps over the lazy yellow dog. The quick brown lorem ipsum jumps over the lazy yellow dolor sit.</p>
+            <p>The quick brown fox jumps over the lazy yellow dog. The quick brown lorem ipsum jumps over the lazy
+                yellow dolor sit.</p>
         </div>
         <div class="pictures-sections">
             <div class="pictures-grid">
-                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/gallery/img1.jpg')"></div></div>
-                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/gallery/img2.jpg')"></div></div>
-                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/gallery/img3.jpg')"></div></div>
-                <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/gallery/img4.jpg')"></div></div>
+                <% for(var i=0; i<4; i++) {%>
+                <figure class="picture-card-container">
+                    <a href="www.google.com">
+                    <div class="picture-card" style="background-image: url('images/gallery/img1.jpg')"></div>
+                    </a>
+                    <figcaption>
+                        <span class="cat-title">Decor</span>
+                        <a href="www.google.com" class="more-button">Enter</a>
+                    </figcaption>
+                </figure>
+                <%}%>
 
             </div>
         </div>
@@ -36,5 +44,3 @@
 </body>
 
 </html>
-
-
