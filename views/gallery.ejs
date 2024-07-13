@@ -25,9 +25,52 @@
             <h1>DECOR GALLERY</h1>
             <p>The quick brown fox jumps over the lazy yellow dog. The quick brown lorem ipsum jumps over the lazy yellow dolor sit.</p>
         </div>
+        <div class="filter-section">
+            <h3>Filters</h3>
+            <div class="filter-divider"></div>
+            <div class="filter-group-section">
+                <h4>Groups</h4>
+                <a onclick="showGroup()" class="filter-group-header">
+                    <p>No filters applied</p>
+                    <p>+</p>
+                </a>
+                <div id="group-content" class="filter-group-content">
+                    <input  class="group-searchbox" placeholder="Search for a group..." type="text">
+                    <label class="checkboxpls">
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>One
+                    </label>
+                </div>
+            </div>
+            <div class="filter-divider"></div>
+            <div class="filter-group-section">
+                <h4>Tags</h4>
+                <a onclick="showTag()" class="filter-group-header">
+                    <p>No filters applied</p>
+                    <p>+</p>
+                </a>
+                <div id="tag-content" class="filter-group-content">
+                    <input  class="group-searchbox" placeholder="Search for a group..." type="text">
+                    <label class="checkboxpls">
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>One
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="pictures-sections">
             <div class="pictures-grid">
-                <div class="picture-card-container">
+                <% for(var i=0; i<11; i++) {%>
+                    <figure class="picture-card-container">
+                        <div class="picture-card" style="background-image: url('images/galleryv2/img2-wide.jpg')"></div>
+                        <figcaption>
+                            <h1>a</h1>
+                            <small>d.</small>
+                            <a href="#">Read More</a>
+                        </figcaption>
+                    </figure>
+                <% } %>
+                <!-- <div class="picture-card-container">
                     <div class="picture-card" style="background-image: url('images/gallery/img1.jpg')"></div>
                 </div>
 
@@ -43,7 +86,7 @@
                 <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/homeimage2.jpg')"></div></div>
                 <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/homeimage3.jpg')"></div></div>
                 <div class="picture-card-container"><div class="picture-card" style="background-image: url('images/homeimage4.jpg')"></div></div>
-                
+                 -->
             </div>
         </div>
     </div>
