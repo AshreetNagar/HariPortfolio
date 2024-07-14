@@ -1,3 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;800&family=VT323&display=swap");
+
+body {
+    position: relative;
+    z-index: -100;
+    margin: 0;
+    /* overflow-x: hidden; */
+    font-family: 'Poppins', sans-serif;
+}
+
 .main-content {
     display: flex;
     align-items: center;
@@ -5,12 +15,8 @@
 
     /* bootstrap carryovers */
     line-height: 1.42857143;
-
-    font-family: 'Poppins', sans-serif;
-
 }
 
-/* Intro  */
 .intro-section {
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -37,12 +43,11 @@
 }
 
 
-/* Filters */
 .filter-section {
     position: fixed;
     display: flex;
     flex-direction: column;
-    width: 12vw;
+    width: 15vw;
     top: 45vh;
     left: 2vw;
     font-family: 'Poppins', sans-serif;
@@ -112,27 +117,21 @@
 
 
 
-/* Gallery */
 .pictures-sections {
     display: flex;
     /* flex-direction: column; */
     justify-content: space-around;
-    padding: 4% 16% 4% 16%;
+    padding: 4%;
 }
 
-.hoverEffect{
+.pictures-grid {
     display: grid;
-    /* grid-template-columns: 33% 33% 33%; */
-    grid-template-columns: 50% 50%;
-}
-
-.picture-card-container{
-    margin: 1vh 0.5vw;
+    grid-template-columns: 33% 33% 33%;
 }
 
 .picture-card {
-    display: block;
-    line-height: 0;
+    width: 20vw;
+    height: 20vw;
     /* 30vw is needed for phone screens */
     /* width:30vw; */
     /* height:30vw; */
@@ -147,36 +146,22 @@
     box-sizing: border-box;
 }
 
-.hoverEffect figcaption h1{
-    font-weight: 200;
+.picture-card-container{
+    margin: 1vh 0.5vw;
 }
 
-.more-button{
-    color: white;
-    background-color: #181818;
-    height: min-content;
-    padding: 0.4rem 1.6rem;
-    border-radius: 5em;
-    font-size: var(1.8rem);
-    line-height: 1;
-    margin-top: 10%;
 
-    /* -webkit-transition: -webkit-transform 0.4s;
-	-moz-transition: -moz-transform 0.4s; */
-	transition: background-color 0.4s;
-}
 
-.more-button:hover{
-    background-color: lightgray;
-}
 
-a:-webkit-any-link { 
-    text-decoration: none !important; 
-} 
+
+
+
+
+
 
 
 /* Hover card */
-.hoverEffect figure {
+.pictures-grid figure{
 	display: inline-block;
 
 	-webkit-perspective: 1700px;
@@ -192,11 +177,15 @@ a:-webkit-any-link {
 	transform-style: preserve-3d;
 }
 
-.hoverEffect figure > div {
+
+/* .pictures-grid figure > div {
+	overflow: hidden;
+} */
+.picture-card-container  {
 	overflow: hidden;
 }
 
-.hoverEffect figure img {
+.picture-card{
 	max-width: 100%;
 	
 	-webkit-transition: -webkit-transform 0.4s;
@@ -204,19 +193,18 @@ a:-webkit-any-link {
 	transition: transform 0.4s;
 }
 
-.hoverEffect figure:hover img{
+.picture-card:hover{
 	-webkit-transform: translateX(25%);
 	-moz-transform: translateX(25%);
 	-ms-transform: translateX(25%);
 	transform: translateX(25%);
 }
 
-.hoverEffect figcaption {
+.picture-card-container figcaption {
 	position: absolute;
 	top: 0;
 	left: 0;
-	/* background: #304352; */
-	background: darkgray;
+	background: #304352;
 
 
 	height: 100%;
@@ -238,17 +226,9 @@ a:-webkit-any-link {
 	-webkit-transition: -webkit-transform 0.4s, opacity 0.1s 0.3s;
 	-moz-transition: -moz-transform 0.4s, opacity 0.1s 0.3s;
 	transition: transform 0.4s, opacity 0.1s 0.3s;
-
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
 }
 
-.hoverEffect figure:hover figcaption{
+.pictures-grid .picture-card-container:hover figcaption{
 	opacity: 1;
 	-webkit-transform: rotateY(0deg);
 	-moz-transform: rotateY(0deg);
@@ -258,38 +238,4 @@ a:-webkit-any-link {
 	transition: transform 0.4s, opacity 0.1s;
 }
 
-@media (width < 768px) {
-    .intro-section {
-        width: 90vw;
-    }
-    .intro-section h1 {
-        font-size: 12vw;
-        font-weight: 100;
-    }
-    
-    .intro-section p {
-        padding: 1%;
-        font-size: 5vw;
-    }    
 
-    .filter-section{
-        display: none;
-    }
-    .hoverEffect{
-        grid-template-columns: 100%;
-    }
-    .pictures-sections {
-        padding: 4% 4% 4% 4%;
-    }
-
-    .hoverEffect figcaption h1{
-        font-weight: 200;
-        font-size: 8vw;
-    }
-
-    .hoverEffect figcaption small{
-        display: none;
-        font-weight: 200;
-        font-size: 2vw;
-    }
-}
