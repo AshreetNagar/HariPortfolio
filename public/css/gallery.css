@@ -120,13 +120,13 @@
     padding: 4% 16% 4% 16%;
 }
 
-.hoverEffect{
+.hoverEffect {
     display: grid;
     /* grid-template-columns: 33% 33% 33%; */
     grid-template-columns: 50% 50%;
 }
 
-.picture-card-container{
+.picture-card-container {
     margin: 1vh 0.5vw;
 }
 
@@ -147,11 +147,11 @@
     box-sizing: border-box;
 }
 
-.hoverEffect figcaption h1{
+.hoverEffect figcaption h1 {
     font-weight: 200;
 }
 
-.more-button{
+.more-button {
     color: white;
     background-color: #181818;
     height: min-content;
@@ -161,83 +161,83 @@
     line-height: 1;
     margin-top: 10%;
 
-    /* -webkit-transition: -webkit-transform 0.4s;
-	-moz-transition: -moz-transform 0.4s; */
-	transition: background-color 0.4s;
+    -webkit-transition: background-color 0.4s;
+	-moz-transition: background-color 0.4s;
+    transition: background-color 0.4s;
 }
 
-.more-button:hover{
+.more-button:hover {
     background-color: lightgray;
 }
 
-a:-webkit-any-link { 
-    text-decoration: none !important; 
-} 
+a:-webkit-any-link {
+    text-decoration: none !important;
+}
 
 
 /* Hover card */
 .hoverEffect figure {
-	display: inline-block;
+    display: inline-block;
 
-	-webkit-perspective: 1700px;
-	-moz-perspective: 1700px;
-	perspective: 1700px;
+    -webkit-perspective: 1700px;
+    -moz-perspective: 1700px;
+    perspective: 1700px;
 
-	-webkit-perspective-origin: 0 50%;
-	-moz-perspective-origin: 0 50%;
-	perspective-origin: 0 50%;
+    -webkit-perspective-origin: 0 50%;
+    -moz-perspective-origin: 0 50%;
+    perspective-origin: 0 50%;
 
-	-webkit-transform-style: preserve-3d;
-	-moz-transform-style: preserve-3d;
-	transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 
-.hoverEffect figure > div {
-	overflow: hidden;
+.hoverEffect figure>div {
+    overflow: hidden;
 }
 
 .hoverEffect figure img {
-	max-width: 100%;
-	
-	-webkit-transition: -webkit-transform 0.4s;
-	-moz-transition: -moz-transform 0.4s;
-	transition: transform 0.4s;
+    max-width: 100%;
+
+    -webkit-transition: -webkit-transform 0.4s;
+    -moz-transition: -moz-transform 0.4s;
+    transition: transform 0.4s;
 }
 
-.hoverEffect figure:hover img{
-	-webkit-transform: translateX(25%);
-	-moz-transform: translateX(25%);
-	-ms-transform: translateX(25%);
-	transform: translateX(25%);
+.hoverEffect figure:hover img {
+    -webkit-transform: translateX(25%);
+    -moz-transform: translateX(25%);
+    -ms-transform: translateX(25%);
+    transform: translateX(25%);
 }
 
 .hoverEffect figcaption {
-	position: absolute;
-	top: 0;
-	left: 0;
-	/* background: #304352; */
-	background: darkgray;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* background: #304352; */
+    background: darkgray;
 
 
-	height: 100%;
-	width: 50%;
-	opacity: 0;
-	
-	-webkit-transform: rotateY(-90deg);
-	-moz-transform: rotateY(-90deg);
-	transform: rotateY(-90deg);
+    height: 100%;
+    width: 50%;
+    opacity: 0;
 
-	-webkit-transform-origin: 0 0;
-	-moz-transform-origin: 0 0;
-	transform-origin: 0 0;
+    -webkit-transform: rotateY(-90deg);
+    -moz-transform: rotateY(-90deg);
+    transform: rotateY(-90deg);
 
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	backface-visibility: hidden;
-	
-	-webkit-transition: -webkit-transform 0.4s, opacity 0.1s 0.3s;
-	-moz-transition: -moz-transform 0.4s, opacity 0.1s 0.3s;
-	transition: transform 0.4s, opacity 0.1s 0.3s;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    transform-origin: 0 0;
+
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    -webkit-transition: -webkit-transform 0.4s, opacity 0.1s 0.3s;
+    -moz-transition: -moz-transform 0.4s, opacity 0.1s 0.3s;
+    transition: transform 0.4s, opacity 0.1s 0.3s;
 
 
     display: flex;
@@ -248,48 +248,107 @@ a:-webkit-any-link {
     text-align: center;
 }
 
-.hoverEffect figure:hover figcaption{
-	opacity: 1;
-	-webkit-transform: rotateY(0deg);
-	-moz-transform: rotateY(0deg);
-	transform: rotateY(0deg);
-	-webkit-transition: -webkit-transform 0.4s, opacity 0.1s;
-	-moz-transition: -moz-transform 0.4s, opacity 0.1s;
-	transition: transform 0.4s, opacity 0.1s;
+.hoverEffect figure:hover figcaption {
+    opacity: 1;
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    -webkit-transition: -webkit-transform 0.4s, opacity 0.1s;
+    -moz-transition: -moz-transform 0.4s, opacity 0.1s;
+    transition: transform 0.4s, opacity 0.1s;
 }
 
 @media (width < 768px) {
     .intro-section {
         width: 90vw;
     }
+
     .intro-section h1 {
         font-size: 12vw;
         font-weight: 100;
     }
-    
+
     .intro-section p {
         padding: 1%;
         font-size: 5vw;
-    }    
+    }
 
-    .filter-section{
+    .filter-section {
         display: none;
     }
-    .hoverEffect{
+
+    .hoverEffect {
         grid-template-columns: 100%;
     }
+
     .pictures-sections {
         padding: 4% 4% 4% 4%;
     }
 
-    .hoverEffect figcaption h1{
+    .hoverEffect figcaption h1 {
         font-weight: 200;
         font-size: 8vw;
     }
 
-    .hoverEffect figcaption small{
+    .hoverEffect figcaption small {
         display: none;
         font-weight: 200;
         font-size: 2vw;
     }
+}
+
+#fullscreen-frame{
+    z-index: -100;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; 
+    height: 100%; 
+    padding: 20px;
+    background-color: #f0f0f0;
+    /* border: 1px solid #ccc; */
+
+    opacity: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#fullscreen-content{
+    width: 50%; 
+    box-shadow: 0 1vw 1.5vw 0 rgba(0, 0, 0, 0.2), 0 1vw 2vw 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    /* height: 50%;  */
+}
+
+#fullscreen-closebtn:after{
+    content: "\00d7"; /* This will render the 'X' */ 
+
+}
+
+#fullscreen-closebtn{
+    display: flex;
+    position: fixed;
+    top: 5%;
+    right: 10%;
+    font-size:xx-large;
+
+    background-color: #99999963;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    width: 3%;
+
+    justify-content: center;
+
+    -webkit-transition: background-color 0.4s;
+	-moz-transition: background-color 0.4s;
+    transition: background-color 0.4s;
+}
+
+#fullscreen-closebtn:hover{
+    background-color: #444 !important;
 }

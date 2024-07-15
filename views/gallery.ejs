@@ -4,7 +4,13 @@
 	<title>Gallery - Hari's Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="stylesheet" href="css/gallery.css">
+
 	
+    <script src="scripts/modernizr.custom.js"></script>
+
+    <script src=" https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js "></script>
+    <link href=" https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery.min.css " rel="stylesheet">
+
 </head>
 <body >
 <!-- Nav section -->
@@ -59,12 +65,17 @@
                     <figcaption>
                         <h1>Two Cameras</h1>
                         <small>A picture of two cameras taken with one camera.</small>
-
-                        <a href="#" class="more-button">Expand</a>
+                        <a onclick="fullscreen(<%= i %>)" href="#" class="more-button">Expand</a>
                     </figcaption>
                 </figure>
             <% } %>
         </div>
+    </div>
+
+    <div id="fullscreen-frame">
+        <a onclick="closeFullscreen(<%= i %>)" id="fullscreen-closebtn"></a>
+        <h1>Two Cameras</h1>
+        <small>A picture of two cameras taken with one camera.</small>
     </div>
 
 </div>
@@ -73,8 +84,20 @@
     <%- include('partials/footer.ejs') %>
 </footer>
 
-<!-- Javascript  -->
-<script src="scripts/modernizr.custom.js"></script>
+<script>
+    var data = 
+    [
+    <% for(var i=0; i<11; i++) {%>
+        {
+            "title": "Two Cameras",
+            "caption": "A picture of two cameras taken with one camera.",
+            "type": "youtube_embed",
+            "fullLink": "TxJtoBAa2w0"
+        },
+    <% } %>
+    ]
+</script>
+<script src="scripts/gallery.js"></script>
 
 </body>
 </html>
