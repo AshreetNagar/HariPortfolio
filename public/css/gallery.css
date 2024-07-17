@@ -145,6 +145,8 @@
     /* bootstrap carryovers */
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+
+    box-shadow: 0 1vw 1.5vw 0 rgba(0, 0, 0, 0.2), 0 1vw 2vw 0 rgba(0, 0, 0, 0.19);
 }
 
 .hoverEffect figcaption h1 {
@@ -258,6 +260,72 @@ a:-webkit-any-link {
     transition: transform 0.4s, opacity 0.1s;
 }
 
+/* Full screen section */
+#fullscreen-frame{
+    z-index: -100;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; 
+    height: 100%; 
+    padding: 20px;
+    background-color: #f0f0f0;
+    /* border: 1px solid #ccc; */
+
+    opacity: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#fullscreen-content{
+    width: 68%; 
+    box-shadow: 0 1vw 1.5vw 0 rgba(0, 0, 0, 0.2), 0 1vw 2vw 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    /* height: 50%;  */
+}
+
+#fullscreen-closebtn:after{
+    content: "\00d7"; /* This will render the 'X' */ 
+
+}
+
+#fullscreen-closebtn{
+    display: flex;
+    position: fixed;
+    top: 5%;
+    right: 10%;
+    font-size:xx-large;
+
+    background-color: #99999963;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    
+    height: 3vw;
+    width: 3vw;
+
+    justify-content: center;
+    align-items: center;
+
+    -webkit-transition: background-color 0.4s;
+	-moz-transition: background-color 0.4s;
+    transition: background-color 0.4s;
+}
+
+#fullscreen-closebtn:hover{
+    background-color: #444 !important;
+}
+
+#fullscreen-caption{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 @media (width < 768px) {
     .intro-section {
         width: 90vw;
@@ -295,60 +363,35 @@ a:-webkit-any-link {
         font-weight: 200;
         font-size: 2vw;
     }
-}
 
-#fullscreen-frame{
-    z-index: -100;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%; 
-    height: 100%; 
-    padding: 20px;
-    background-color: #f0f0f0;
-    /* border: 1px solid #ccc; */
 
-    opacity: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+    #fullscreen-closebtn{
+        display: flex;
+        position: fixed;
+        top: 6%;
+        right: 8%;
+        font-size:xx-large;
+        
+    }
 
-#fullscreen-content{
-    width: 50%; 
-    box-shadow: 0 1vw 1.5vw 0 rgba(0, 0, 0, 0.2), 0 1vw 2vw 0 rgba(0, 0, 0, 0.19);
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-    /* height: 50%;  */
-}
+    #fullscreen-content{
+        display: flex;
 
-#fullscreen-closebtn:after{
-    content: "\00d7"; /* This will render the 'X' */ 
+        width: 90%; 
+        box-shadow: 0 1vw 1.5vw 0 rgba(0, 0, 0, 0.2), 0 1vw 2vw 0 rgba(0, 0, 0, 0.19);
+        /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        /* height: 50%;  */
+    }
+
+    #fullscreen-caption h1{
+        font-weight: 200;
+    }
+
+
+    #fullscreen-caption{
+        text-align: center;
+    }
 
 }
 
-#fullscreen-closebtn{
-    display: flex;
-    position: fixed;
-    top: 5%;
-    right: 10%;
-    font-size:xx-large;
-
-    background-color: #99999963;
-    border-radius:50%;
-    -moz-border-radius:50%;
-    -webkit-border-radius:50%;
-    width: 3%;
-
-    justify-content: center;
-
-    -webkit-transition: background-color 0.4s;
-	-moz-transition: background-color 0.4s;
-    transition: background-color 0.4s;
-}
-
-#fullscreen-closebtn:hover{
-    background-color: #444 !important;
-}

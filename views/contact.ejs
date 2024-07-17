@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.js'></script>
+    <script src='/packages/fullcalendar-6.1.15/packages/google-calendar/index.global.js'></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="/css/contact.css">
 </head>
 <body>
@@ -25,7 +29,7 @@
         </div>
         <div class="right-side">
             <h1>Send a Message!</h1>
-            <form id="contact-form" action="mailto:haritharmaprod@gmail.com" method="POST" enctype="text/plain">
+            <form onsubmit="return formSubmitFunc(event)" id="contact-form" method="POST" enctype="text/plain">
                 <div class="form-group">
                     <div class="form-row name-fields">
                         <div class="form-field">
@@ -61,13 +65,13 @@
                         </div>
                     </div>
                     <div class="form-row date-time">
-                        <div class="form-field">
+                        <div id="formDateInput" class="form-field">
                             <label for="date">Preferred Date</label>
                             <input type="date" id="date" name="date">
                         </div>
                     </div>
                     <div class="form-row time-fields">
-                        <div class="form-field">
+                        <div id="starttimeform" onclick="checkTime(event)" class="form-field">
                             <label for="start-time">Start Time</label>
                             <input type="time" id="start-time" name="start-time">
                         </div>
@@ -87,10 +91,11 @@
             </form>
         </div>
     </div>
+    <div id="calendar" style="display: none;"></div>
     <footer>
         <%- include('partials/footer.ejs') %>
     </footer>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <!-- <script src="scripts.js"></script> -->
+    <script src="scripts/contact.js"></script>
 </body>
 </html>

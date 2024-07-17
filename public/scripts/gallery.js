@@ -1,3 +1,7 @@
+
+
+
+
 // ---------------------- Pagination section ----------------------
 // Display gallery from var in .ejs file
 // On reaching bottom of page, add more data to that variable, and append

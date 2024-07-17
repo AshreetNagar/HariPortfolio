@@ -101,7 +101,17 @@ body {
     border-radius: 5em;
     font-size: var(1.8rem);
     line-height: 1;
+
+    -webkit-transition: background-color 0.4s;
+	-moz-transition: background-color 0.4s;
+    transition: background-color 0.4s;
 }
+
+.more-button:hover{
+    background-color: #999;
+
+}
+
 
 a:-webkit-any-link { 
     text-decoration: none !important; 
