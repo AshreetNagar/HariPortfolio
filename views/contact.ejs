@@ -8,6 +8,7 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.js'></script>
     <script src='/packages/fullcalendar-6.1.15/packages/google-calendar/index.global.js'></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src='/packages/time_slot_picker.js'></script>
 
     <link rel="stylesheet" href="/css/contact.css">
 </head>
@@ -65,19 +66,26 @@
                         </div>
                     </div>
                     <div class="form-row date-time">
-                        <div id="formDateInput" class="form-field">
+                        <div onclick="openCalendar(event)" id="formDateInput" class="form-field">
+                            <div style="display: none;" id="calendarPopupDiv" class="popup">
+                                <span class="popuptext" id="myPopup">
+                                    <div id="calendar" ></div>
+                                    <small id="calendarWarning">Please select a date that is not in the past.</small>
+                                </span>
+                            </div>
                             <label for="date">Preferred Date</label>
                             <input type="date" id="date" name="date">
                         </div>
                     </div>
                     <div class="form-row time-fields">
-                        <div id="starttimeform" onclick="checkTime(event)" class="form-field">
-                            <label for="start-time">Start Time</label>
+                        <div onclick="openSlotPicker(event)" id="formTimeInput" class="form-field">
+                            <div id="slotPickerPopupDiv" class="popup">
+                                <span class="popuptext" id="slotPickerPopup">
+                                    <div id="time-slot-picker"></div>
+                                </span>
+                            </div>
+                            <label for="end-time">Time Slot</label>
                             <input type="time" id="start-time" name="start-time">
-                        </div>
-                        <div class="form-field">
-                            <label for="end-time">End Time</label>
-                            <input type="time" id="end-time" name="end-time">
                         </div>
                     </div>
                     <div class="form-row message-box">
@@ -91,7 +99,6 @@
             </form>
         </div>
     </div>
-    <div id="calendar" style="display: none;"></div>
     <footer>
         <%- include('partials/footer.ejs') %>
     </footer>

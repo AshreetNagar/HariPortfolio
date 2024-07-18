@@ -176,6 +176,84 @@ button:hover {
   transform: scale(1.05);
 }
 
+/* Calendar Popup */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+
+  /* width: 352.984px; */
+  /* width: 500px; */
+  /* width: 100%; */
+
+
+  /* width: 100%; */
+  /* text-align: center; */
+  /* width: 160px; */
+  /* left: 50%; */
+  /* margin-left: -80px; */
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 0.25s;
+  animation: fadeIn 0.25s
+}
+
+#calendar{
+  height: 40vh;
+}
+
+#calendarWarning{
+  display: flex;
+  visibility: hidden;
+  justify-content: center;
+  color: red;
+}
+
+#slotPickerPopup{
+  /* background-color: ghostwhite; */
+  /* height: 40vh; */
+  /* width: 500px; */
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+
 @keyframes fadeInText {
   from {
       opacity: 0;

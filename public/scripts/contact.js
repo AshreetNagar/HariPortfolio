@@ -1,4 +1,20 @@
+// Make this pop up like the calendar does
+// Show the range in the button (9-11 AM)
+// Blank out filled slots
 
+$('#time-slot-picker').timeSlotPicker(
+    {
+        startTime:'09:00',
+        endTime:'18:00',
+        timeStep:'120',
+        defaultDate:'2021-05-31',
+        maxDateTime:'2021-05-30 18:00',
+        minDateTime:'2021-05-30 09:00',
+        minDayTime:'09:00',
+        maxDayTime:'18:00',
+        inputElementSelector:'#time-slot-input'
+    }
+);
 
 var calendar = ""
 var selectedDay = ""
@@ -11,44 +27,47 @@ function isRealValue(obj)
 
 document.addEventListener('DOMContentLoaded', function() {
     const calendarEl = document.getElementById('calendar');
+    calendarEl.style.width = document.getElementById('date').offsetWidth + "px  "
+    document.getElementById('time-slot-picker').style.width = document.getElementById('start-time').offsetWidth + "px  "
+
 
     calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        // plugins: [ googleCalendarPlugin ],
         googleCalendarApiKey: 'AIzaSyCl3MxjwR0UYF8yEAj4rhOZ9HKvdbwqwUU', // Add your API key here
         events: 'firstname.lastname.shut@gmail.com',
-        // events: 'calendar.google.com/calendar/u/1?cid=Zmlyc3RuYW1lLmxhc3RuYW1lLnNodXRAZ21haWwuY29t',
-        // events: {
-        //     googleCalendarId: 'firstname.lastname.shut@gmail.com', // Add your Calendar ID here
-        //     className: 'gcal-event' // Add custom class to events
-        // },
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         eventClick: function(info) {
-            // openModal(info.event.start, info.event.end);
             info.jsEvent.preventDefault();
         },
         eventContent: function (arg) {
             var event = arg.event;
             const eventText = "Busy"
             var customHtml = '';
-            customHtml += "<span class='r10 highlighted-badge font-xxs font-bold clearColour'>" + eventText + "</span>";
-
+            // customHtml += "<span class='r10 highlighted-badge font-xxs font-bold clearColour'>" + eventText + "</span>";
             return { html: customHtml }
         },
         dateClick: function(info) {
             var today = new Date()
             if (info.date>today){
+                var popup = document.getElementById("myPopup");
                 selectedDay = info.date
-                openModal("", "");
-                // IsDateHasEvent(info)    
+                console.log(info.date)
+                document.querySelector('#date').value = info.date.toISOString().split('T')[0]
+                document.querySelector('#calendarWarning').style.visibility = "hidden";
+                popup.classList.toggle("show"); 
+            }else{
+                document.querySelector('#calendarWarning').style.visibility = "hidden";
+                document.querySelector('#calendarWarning').style.visibility = "visible";
+
             }            
             // Grayed out days if fully booked logic can be added here
         }
     });
+
 
     calendar.render();
 
@@ -60,30 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             calEvent = allEvents[calEventKey]
             console.log(calEvent)
         });
-        // var event = $.grep(allEvents, function (v) {
-        //     return v.start === date;
-        // });
-        // return event.length > 0;
     }
-
-    function openModal(start, end) {
-        const modal = document.getElementById('contactFormModal');
-        modal.style.display = 'block';
-        // Populate form with date details if needed
-    }
-
-    // const modal = document.getElementById('contactFormModal');
-    // const closeModal = document.getElementsByClassName('close')[0];
-
-    // closeModal.onclick = function() {
-    //     modal.style.display = 'none';
-    // }
-
-    // window.onclick = function(event) {
-    //     if (event.target === modal) {
-    //         modal.style.display = 'none';
-    //     }
-    // }
 
 });
 
@@ -94,9 +90,6 @@ function validTimeCheck(){
     const endEmpty = !isRealValue(endTimeInput)
     var allEvents = calendar.currentData.eventStore.instances
     
-    // console.log(startEmpty)
-    // console.log(endEmpty)
-
     // if both are null, do nothing
     if (startEmpty && endEmpty){
         return
@@ -175,20 +168,6 @@ function validTimeCheck(){
 // Calendar: only click days after today
 // 
 
-function checkTime(e){
-
-    var $formDateInput = $('#formDateInput');
-    console.log($formDateInput[0].value)
-
-    console.log("time")
-    event.preventDefault()
-
-    // var $form = $('#contact-form');
-    // console.log($form[0])
-    // $form[0].reportValidity();
-
-
-}
 
 function formSubmitFunc(e) {
     console.log("hi")
@@ -196,4 +175,41 @@ function formSubmitFunc(e) {
     console.log("ddi it works")
     e.preventDefault();
     return false;
+}
+
+
+function openCalendar(e){
+    event.preventDefault();    
+    var popup = document.getElementById("myPopup");
+    const clickedOnClosedPopup = popup && !popup.classList.contains('show');
+    if (clickedOnClosedPopup) {
+        popup.classList.toggle("show");
+        var popupDiv = document.getElementById("calendarPopupDiv");
+        popupDiv.style.display = "inline-block";
+        calendar.render()
+    }
+}
+// Close Calendar
+window.addEventListener('click', ({target}) => {
+    var popup = document.getElementById("myPopup");
+    const isInPopup = target.closest("#formDateInput")
+    document.querySelector('#calendarWarning').style.visibility = "hidden";
+    if ((isInPopup == null)){
+        popup.classList.remove("show");  
+        document.getElementById("calendarPopupDiv").style.display = "none";
+    }
+});
+
+
+function openSlotPicker(e){
+    event.preventDefault();    
+    var popup = document.getElementById("slotPickerPopup");
+    const clickedOnClosedPopup = popup && !popup.classList.contains('show');
+    if (clickedOnClosedPopup) {
+        console.log("help")
+        console.log(popup)
+        popup.classList.toggle("show");
+        document.getElementById("slotPickerPopupDiv").display = "inline-block";
+        console.log(document.getElementById("slotPickerPopupDiv"))
+    }
 }
