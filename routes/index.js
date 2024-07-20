@@ -67,4 +67,10 @@ router.post('/contact', async (req, res) => {
     }
 });
 
+// Debug Page
+router.get('/debug', (req,res) => {
+    res.render('debug');
+});
+
+
 module.exports = router;

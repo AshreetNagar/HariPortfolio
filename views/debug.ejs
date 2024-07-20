@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug</title>
+</head>
+<body>
+    <header>
+        <%- include('partials/navbar') %>
+    </header>
+    <div id="main-content">
+        <h1 id="msg1"></h1>
+    </div>
+    <footer>
+        <%- include('partials/footer.ejs') %>
+    </footer>
+
+    <script>
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        async function updateViewDimensions(){
+            while(true){
+                let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+                let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+                document.getElementById("msg1").innerHTML = vw+"x"+vh;
+                await delay(2000)
+                console.log("stop")
+            }
+
+        }
+        updateViewDimensions()
+        console.log("stop")
+    </script>
+
+</body>
+</html>

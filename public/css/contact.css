@@ -37,7 +37,7 @@ header, footer {
 
 .left-side .ContactUscontent {
   text-align: center;
-  max-width: 80%;
+  max-width: 95%;
   animation: fadeInText 2s;
 }
 
@@ -178,8 +178,9 @@ button:hover {
 
 /* Calendar Popup */
 .popup {
+  display: flex;
   position: relative;
-  display: inline-block;
+  /* display: inline-block; */
   cursor: pointer;
 }
 
@@ -231,15 +232,17 @@ button:hover {
 
 #calendarWarning{
   display: flex;
-  visibility: hidden;
+  /* visibility: hidden; */
   justify-content: center;
   color: red;
 }
 
-#slotPickerPopup{
-  /* background-color: ghostwhite; */
-  /* height: 40vh; */
-  /* width: 500px; */
+.tsp-time-wrapper{
+  background-color: ghostwhite;
+}
+
+#slotPickerPopupDiv{
+  display: flex;
 }
 
 /* Add animation (fade in the popup) */
@@ -295,20 +298,84 @@ button:hover {
   }
 }
 
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{
+  /* height: 0px; */
+  min-height: 1em;
+}
+
 @media (max-width: 767px) {
+
+
+
+  /* .fc .fc-button {
+    font-size: 0.5em;
+  }
+  */
+  .fc .fc-toolbar-title{
+    font-size: 3vh;
+  } 
+
+  .fc a{
+    font-size: 2vh;
+  }
+
+
+
   .container {
     flex-direction: column;
     align-items: stretch;
   }
 
   .left-side {
+    align-items: flex-start;
+    padding: 0em;
     height: 70vh;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
   }
 
+  .left-side h1{
+    margin-block-start: 0.5vh;
+    margin-block-end: 0.5vh;
+    font-size: 5vh;
+  }
+
+  .left-side p{
+    margin-block-start: 0.5vh;
+    /* margin-block-end: 0.5vh; */
+    font-size: 3vh;
+  }
+  .left-side a{
+    /* color:#AF52DE; */
+    margin-block-end: 0.5vh;
+    font-size: 3vh;
+
+  }
+
   .right-side {
     margin-top: -25px;
     border-top-left-radius: 0;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
   }
+
+  .tsp-time-wrapper{
+    font-size: 5vw;
+  }
+
+  .fc .fc-toolbar.fc-header-toolbar{
+    margin-bottom: 1vh;
+  }
+
+  .fc .fc-button{
+    font-size: 2vh;
+  }
+
+  tbody{
+    overflow-y: scroll;
+    overflow: -moz-scrollbars-vertical; 
+    scrollbar-color: rebeccapurple green; 
+  }
+
 }

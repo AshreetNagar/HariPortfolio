@@ -8,7 +8,7 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.js'></script>
     <script src='/packages/fullcalendar-6.1.15/packages/google-calendar/index.global.js'></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src='/packages/time_slot_picker.js'></script>
+    <script src='/scripts/time_slot_picker_modified.js'></script>
 
     <link rel="stylesheet" href="/css/contact.css">
 </head>
@@ -30,7 +30,7 @@
         </div>
         <div class="right-side">
             <h1>Send a Message!</h1>
-            <form onsubmit="return formSubmitFunc(event)" id="contact-form" method="POST" enctype="text/plain">
+            <form id="contact-form" action="/contact" method="POST" enctype="text/plain">
                 <div class="form-group">
                     <div class="form-row name-fields">
                         <div class="form-field">
@@ -67,10 +67,10 @@
                     </div>
                     <div class="form-row date-time">
                         <div onclick="openCalendar(event)" id="formDateInput" class="form-field">
-                            <div style="display: none;" id="calendarPopupDiv" class="popup">
+                            <div id="calendarPopupDiv" class="popup">
                                 <span class="popuptext" id="myPopup">
                                     <div id="calendar" ></div>
-                                    <small id="calendarWarning">Please select a date that is not in the past.</small>
+                                    <small id="calendarWarning"></small>
                                 </span>
                             </div>
                             <label for="date">Preferred Date</label>
@@ -85,7 +85,8 @@
                                 </span>
                             </div>
                             <label for="end-time">Time Slot</label>
-                            <input type="time" id="start-time" name="start-time">
+                            <!-- <input type="time" id="start-time" name="start-time"> -->
+                            <input type="text" id="start-time" name="start-time" readonly>
                         </div>
                     </div>
                     <div class="form-row message-box">
