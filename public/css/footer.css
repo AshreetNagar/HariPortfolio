@@ -3,13 +3,13 @@
 /* Footer */
 footer {
     position: relative;
-    width: 99%;
+    width: 100%;
     background: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding: 20px 0; */
-    z-index: -75    ;
+    z-index: -75;
+    padding: 30px 0;
 }
 
 /* Content */
@@ -40,13 +40,16 @@ footer {
 .links a {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
     color: #000000;
     text-decoration: none;
+    transition: transform 0.2s, font-weight 0.2s, color 0.2s;
 }
 
 .links a:hover {
-    text-decoration: underline;
+    transform: scale(1.1);
+    font-weight: bold;
+    color: #AF52DE;
 }
 
 /* Social Links */
@@ -81,7 +84,7 @@ footer {
     align-items: center;
     width: 100%;
     max-width: 1440px;
-    padding: 10px 0;
+    padding: 20px 0 30px; /* Added padding at the bottom */
 }
 
 .divider {
@@ -96,32 +99,27 @@ footer {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 1312px;
-    padding: 10px 0;
+    gap: 40px; /* Increased gap */
+    padding: 20px 0; /* Added padding to move the text lower */
     text-align: center;
 }
 
-.row p {
+.row p, .footer-links a {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 14px;
     color: #000000;
-    margin-right: 20px;
+    margin: 0;
 }
 
 .footer-links {
     display: flex;
     flex-direction: row;
-    gap: 24px;
+    gap: 40px; /* Increased gap */
     justify-content: center;
 }
 
 .footer-links a {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    color: #000000;
     text-decoration: underline;
 }
 
@@ -135,17 +133,24 @@ footer {
 
     .links {
         gap: 32px;
+
+        /* Shifted to the right */
+        /* transform: translateX(7%);  */
     }
 
     .row {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 10px 16px;
+        padding: 20px 16px; /* Adjusted padding for proper centering */
     }
 
     .footer-links {
         flex-direction: column;
         gap: 16px;
+    }
+
+    .divider {
+        width: 90%;
     }
 }

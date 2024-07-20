@@ -1,18 +1,61 @@
-<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="css/navbar.css">
+<div id="navbarLogoPurple">
+    <a href="/">
+        <img src="images/LogoPurple.png" alt="HT Productions Logo">
+    </a>
+</div>
 <nav class="navbar">
-    <div class="navLogo">
-        <a href="/">
-            <img src="/images/LogoPurple.png" id="navbarLogoPurple">
-        </a>
-    </div>
-    <div class="navMenuBtn">
-        <i class="fa fa-bars"></i>
-    </div>
     <ul>
-        <div id="navLinks">
-            <li id="navLinkHome"><a href="/">Home</a></li>
-            <li><a href="/gallerycategories">Gallery</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </div>
+        <li id="navLinkHome"><a href="/">Home</a></li>
+        <li><a href="/gallery">Gallery</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <ul class="mobile">
+        <li><a href="/">Home</a></li>
+        <li><a href="/gallery">Gallery</a></li>
+        <li><a href="/contact">Contact</a></li>
     </ul>
 </nav>
+<script>
+    function toggleMenu() {
+        const mobileMenu = document.querySelector('.navbar ul.mobile');
+        mobileMenu.classList.toggle('show');
+    }
+
+    // Show/hide navbar on scroll
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', function() {
+        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        const navbar = document.querySelector('.navbar');
+        let scrollDiff = (lastScrollTop-currentScroll)
+        if (currentScroll > lastScrollTop) {
+            // Downscroll
+            let maxUpPos = (Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)*-9)/100
+            let newPos = navbar.style.top;
+            if ((newPos == "")){
+                newPos = "0"
+            }else if ((newPos.slice(-2) == "px")){
+                newPos = newPos.slice(0,-2)
+            }            
+            navbar.style.top = Math.max(parseFloat(newPos)+scrollDiff,maxUpPos)+'px'; // Hide navbar
+            // navbar.style.top = '-9vh'; // Hide navbar
+        } else {
+            // Upscroll
+            // navbar.style.top = Math.min(newPos,downPos)+'vh'; // Hide navbar
+            let newPos = navbar.style.top;
+            if ((newPos == "")){
+                newPos = "0"
+            }else if ((newPos.slice(-2) == "px")){
+                newPos = newPos.slice(0,-2)
+            }
+            navbar.style.top = Math.min(parseFloat(newPos)+scrollDiff,0)+'px'; // Hide navbar
+            // navbar.style.top = '0'; // Show navbar
+        }
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+    }, false);
+</script>

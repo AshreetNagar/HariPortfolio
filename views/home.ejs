@@ -6,12 +6,16 @@
     <title>HT Productions</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
     <header>
+        <!-- Navbar Start --->
         <%- include('partials/navbar') %>
+        <!-- Navbar End --->
     </header>
+
     <div class="carousel-container">
         <div class="carousel">
             <img id="image0" src="images/homeimage1.jpg" alt="Slide 1">
@@ -43,10 +47,8 @@
     <div class="video-carousel-container">
         <div class="video-carousel">
             <video id="video0" src="video/homevideo1.mp4" controls></video>
-            <!-- <video id="video1" src="video/homevideo2.mp4" controls></video> -->
             <video id="video1" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" controls></video>
             <video id="video2" src="https://filesamples.com/samples/video/mp4/sample_1280x720.mp4" controls></video>
-            <!-- <video id="video3" src="video/homevideo4.mp4" controls></video> -->
             <video id="video3" src="https://videos.pexels.com/video-files/20708668/20708668-sd_360_640_24fps.mp4" controls></video>
         </div>
         <div class="view-more-button">
@@ -55,6 +57,7 @@
     </div>
 
     <div class="testimonial-section">
+        <h2>Testimonials</h2> <!-- Testimonial Heading -->
         <div class="stars">
             ★★★★★
         </div>
@@ -63,9 +66,11 @@
         </blockquote>
         <p class="testimonial-author">John Doe, CEO of Company</p>
     </div>
-    <footer>
-        <%- include('partials/footer.ejs') %>
-    </footer>
+
+    <!-- Footer Start -->
+    <%- include('partials/footer') %>
+    <!-- Footer End -->
+
     <script src="scripts/home.js"></script>
 </body>
 </html>

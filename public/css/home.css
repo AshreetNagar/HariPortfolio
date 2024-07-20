@@ -1,9 +1,11 @@
+html, body{
+    overflow-x: hidden;
+}
 body {
     position: relative;
     z-index: -100;
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
 }
 
 .carousel-container {
@@ -198,4 +200,26 @@ blockquote {
 .testimonial-author {
     font-size: 1.2em;
     color: grey;
+}
+
+/* Button Hover Effect */
+.button:hover {
+    transform: scale(1.1);
+    font-weight: bold;
+    color: white;
+}
+
+/* Position the "View More" Button Slightly Higher */
+.view-more-button {
+    position: absolute;
+    bottom: 50px; /* Change from 20px to 50px */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Testimonial Heading */
+.testimonial-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: white;
 }
