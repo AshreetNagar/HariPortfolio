@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Test JS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/9.0.2/superagent.min.js" integrity="sha512-e84UZs/qgoc2ukW/tXc+jZLbZcgphbBWspjOjC3YBaVK+4F6rL0vF8ATmmEUsWRjmci/dUEsZuZdizb9bjatdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.css" integrity="sha512-087vysR/jM0N5cp13Vlp+ZF9wx6tKbvJLwPO8Iit6J7R+n7uIMMjg37dEgexOshDmDITHYY5useeSmfD1MYiQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.js" integrity="sha512-lR8d1BXfYQuiqoM/LeGFVtxFyspzWFTZNyYIiE5O2CcAGtTCRRUMLloxATRuLz8EmR2fYqdXYlrGh+D6TVGp3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        #crop-container {
+            display: block;
+            /* This rule is very important, please don't ignore this */
+            /* width: 50vw; */
+            height: 50vh;
+        }
+    </style>
+
+</head>
+<body>
+
+
+
+    <button onclick="hideCropSection()">Hide Cropping Section</button>
+    <button onclick="showCropSection()">Show Cropping Section</button>
+
+    <button onclick="hideGDriveSection()">Hide Google Drive Section</button>
+    <button onclick="showGDriveSection()">Show Google Drive Section</button>
+
+    <!-- Google Drive Section -->
+    <div id="googleDriveTest">
+        <h1>Google Drive Section</h1>
+        <div id="listSection">
+            <button onclick="reloadList()">Reload List</button>
+            <ul id="theGoogleList">
+            </ul>
+        </div>
+        <form>
+            <span>Upload: </span><input id="file" type="file" name="myFile">
+        </form>
+        <div>
+            <span>Multi Upload: </span><input type="file" name="filefield" multiple="multiple">
+        </div>
+    </div>
+
+
+    <!-- Cropping Section -->
+    <div id="croppingTest">
+        <h1>Cropping Section</h1>
+        <div id="crop-container">
+            <img id="image" src="http://localhost:3000/images/gallery/img1.jpg">
+        </div>
+        <button onclick="getImg()">crop this</button>
+        
+        <div id="crop-container-2">
+            <img id="image-2" src="">
+        </div>
+    </div>
+
+
+<!-- Cropping Scripts -->
+<script>
+    const image = document.getElementById('image');
+    const cropper = new Cropper(image, {
+    aspectRatio: 9 / 16,
+    // crop(event) {
+    //     console.log(event.detail.x);
+    //     console.log(event.detail.y);
+    //     console.log(event.detail.width);
+    //     console.log(event.detail.height);
+    //     console.log(event.detail.rotate);
+    //     console.log(event.detail.scaleX);
+    //     console.log(event.detail.scaleY);
+    // },
+    });
+    function getImg(){
+        // console.log("hi")
+        document.getElementById('image-2').src = cropper.getCroppedCanvas().toDataURL('image/jpeg')
+
+        // console.log(cropper.getCroppedCanvas().toDataURL('image/jpeg'))
+        
+    }
+    function hideCropSection(){
+        document.getElementById("croppingTest").style = "display: none"
+    }
+    function showCropSection(){
+        document.getElementById("croppingTest").style = "display: block"
+    }
+</script>
+<!-- Google Drive Scripts -->
+<script>
+    const token = "<%= token %>"
+    // console.log("the token is\/")
+    // console.log(token)
+    function hideGDriveSection(){
+        document.getElementById("googleDriveTest").style = "display: none"
+    }
+    function showGDriveSection(){
+        document.getElementById("googleDriveTest").style = "display: block"
+    }
+
+
+    function reloadList(){
+        fetch("https://www.googleapis.com/drive/v3/files", {
+            method: "GET",
+            headers: {"Authorization": 'Bearer ' + token}
+        })
+        .then((response) =>{
+            return response.json()
+        })
+        .then((json) => {
+            console.log(json.files)
+            let theList = document.getElementById("theGoogleList")
+            theList.innerHTML=""
+            json.files.forEach(element => {
+                var li = document.createElement("li");
+                var btn = document.createElement("button")
+                btn.onclick = function(){console.log(element["id"]);reloadList();}
+                btn.appendChild(document.createTextNode("delete"))
+                li.appendChild(btn);
+                li.appendChild(document.createTextNode(" "+element["name"]));
+                theList.appendChild(li)
+            });
+        });
+    }
+
+    function getFile(fileID){
+        fetch("https://www.googleapis.com/drive/v3/files/"+fileID+"?fields=webContentLink,thumbnailLink", {
+            method: "GET",
+            headers: {"Authorization": 'Bearer ' + token}
+        })
+        .then((response) =>{
+            console.log(response.status)
+            return response.json()
+        })
+        .then((json) => console.log(json));
+    }
+    // getFile("1cUeDibtAgHiYxosCvMNEGkUdinMAX9mm")
+    
+
+    function shareFile(fileID){
+        fetch("https://www.googleapis.com/drive/v3/files/"+fileID+"/permissions", {
+            method: "POST",
+            body: JSON.stringify({
+                "type": "anyone",
+                "role":"reader"
+            }),
+            headers: {"Authorization": 'Bearer ' + token}
+        })
+        .then((response) =>{
+            console.log(response.status)
+            return response.json()
+        })
+        .then((json) => console.log(json));
+    }
+    // shareFile("1cUeDibtAgHiYxosCvMNEGkUdinMAX9mm")
+    
+    function listFiles(){
+        fetch("https://www.googleapis.com/drive/v3/files", {
+            method: "GET",
+            headers: {"Authorization": 'Bearer ' + token}
+        })
+        .then((response) =>{
+            console.log(response.status)
+            return response.json()
+        })
+        .then((json) => console.log(json));
+    }
+    // listFiles()
+
+    function getStorageQuota(){
+        fetch("https://www.googleapis.com/drive/v3/about/?fields=kind,user,storageQuota", {
+            method: "GET",
+            headers: {"Authorization": 'Bearer ' + token}
+        })
+        .then((response) =>{
+            console.log(response.status)
+            return response.json()
+        })
+        .then((json) => console.log(json));
+    }
+
+    
+    function gd_uploadFileV1(name, contentType, data, callback) {
+        const boundary = '-------314159265358979323846';
+        const delimiter = "\r\n--" + boundary + "\r\n";
+        const close_delim = "\r\n--" + boundary + "--";
+
+        contentType = contentType || "text/html";
+        var metadata = {
+            name: name,
+            'mimeType': contentType
+        };
+
+        var multipartRequestBody =
+            delimiter +  'Content-Type: application/json\r\n\r\n' +
+            JSON.stringify(metadata) +
+            delimiter +
+            'Content-Type: ' + contentType + '\r\n';
+
+        //Transfer images as base64 string.
+        if (contentType.indexOf('image/') === 0) {
+            var pos = data.indexOf('base64,');
+            multipartRequestBody += 'Content-Transfer-Encoding: base64\r\n' + '\r\n' +
+                data.slice(pos < 0 ? 0 : (pos + 'base64,'.length));
+        } else {
+            multipartRequestBody +=  + '\r\n' + data;
+        }
+        multipartRequestBody += close_delim;
+
+        if (!callback) { callback = function(file) { console.log("Update Complete ", file) }; }
+
+        superagent.post('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart').
+            set('Content-Type', 'multipart/form-data;  boundary="' + boundary + '"').
+            set('Authorization', 'Bearer ' + token).
+            send(multipartRequestBody).
+            end(function () {
+                console.log(arguments);
+            });
+    }
+
+
+    function gd_uploadFile(name, contentType, data, callback) {
+
+        fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=media", {
+            method: "POST",
+            body: data,
+            headers: {
+                "Content-type": contentType,
+                "Authorization": 'Bearer ' + token
+            }
+        })
+        .then((response) =>{
+            console.log(response.status)
+            return response.json()
+        })
+        .then((json) => console.log(json));
+    }
+
+
+    
+
+
+    //On upload
+    $('#file')[0].onchange = function () {
+        var file = $('#file')[0].files[0];
+        if (file && file.type === 'image/jpeg') {
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                var data = reader.result;
+                gd_uploadFile('img.jpg', 'image/jpeg', data, "");
+            }
+            reader.readAsDataURL(file);
+        }
+    };
+
+
+</script>
+
+</body>
+</html>

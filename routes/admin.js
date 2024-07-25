@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const ensureAuthenticated = require('../middlewares/auth');
 const Media = require('../models/Media');
+const { google } = require("googleapis");
+const auth = new google.auth.GoogleAuth({ 
+    keyFile: "./serviceaccount.json", 
+    scopes: "https://www.googleapis.com/auth/drive", 
+}); 
+let tokVar =  {"token":""}
 
 // Admin Dashboard
 router.get('/dashboard', ensureAuthenticated, async (req, res) => {
@@ -11,6 +17,40 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
+    }
+});
+
+router.get('/googleDriveTest', ensureAuthenticated, async(req,res) =>{
+    let nowTime = (new Date()).getTime();
+    if (tokVar['token'] == ""){
+        console.log("empty tokVar")
+        auth.getAccessToken()
+        .then((token) => {
+            tokVar['token'] = {"token":token,"time":nowTime}
+            res.render('admin/googleDriveTest', { token });
+        })
+        .catch((err) => {
+            console.log("err: ", err)
+            res.json({ error: 'Internal Server Error' });
+            return;
+        });
+    }else if (nowTime-tokVar['token']["time"] > (5*60*1000)){
+        console.log("expired tokVar")
+        auth.getAccessToken()
+        .then((token) => {
+            tokVar['token'] = {"token":token,"time":nowTime}
+            res.render('admin/googleDriveTest', { token });
+        })
+        .catch((err) => {
+            console.log("err: ", err)
+            res.json({ error: 'Internal Server Error' });
+            return;
+        });
+    }else{
+        let token = tokVar['token']
+        const diff = (nowTime-tokVar['token']["time"])/(60*1000)
+        console.log("use "+ diff+ " minutes old tokVar")
+        res.render('admin/googleDriveTest', { token });
     }
 });
 
