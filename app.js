@@ -42,7 +42,7 @@ const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
 app.use('/', indexRouter);
 app.use('/', authRouter);
-// app.use('/admin', adminRouter);
+app.use('/admin', adminRouter);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
