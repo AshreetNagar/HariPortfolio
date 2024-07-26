@@ -1,6 +1,4 @@
-html, body{
-  overflow-x: hidden;
-}
+
 
 body {
   margin: 0;
@@ -21,6 +19,7 @@ header, footer {
   flex: 1;
   align-items: center;
   overflow: hidden;
+  margin-top: 9vh;
 }
 
 .left-side {
