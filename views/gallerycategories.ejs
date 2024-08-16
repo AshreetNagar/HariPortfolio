@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - Hari's Portfolio</title>
     <link rel="stylesheet" href="/css/gallerycategories.css">
-    <script src="scripts/gallery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <!-- <script src="scripts/gallery.js"></script> -->
     <!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script> -->
 </head>
 
@@ -22,18 +24,18 @@
                 yellow dolor sit.</p>
         </div>
         <div class="pictures-sections">
-            <div class="pictures-grid">
-                <% for(var i=0; i<4; i++) {%>
+            <div id="category-grid" class="pictures-grid">
+                <!-- <% for(var i=0; i<4; i++) {%>
                 <figure class="picture-card-container">
                     <a href="gallery">
-                    <div class="picture-card" style="background-image: url('https://lh3.googleusercontent.com/fife/ALs6j_FmCcJjgO4XfABJeztorvhTi953xOzM0WISMT0lVya2Nmd-7HTiwANXn7TNb3SvM2TAGyoFuSItOZOSwvfD7i0fNE7dem8RvEv4QWR8Y1RxZ_dXmpJW0AzhAP4rAQt9V8wXm1mJkYHRZ5GanIvbYzRDf3smJSM8sFlchd_NIqU5qMH7vBlwV5kLATPDX4pVOnmhElff0t_me5Mf8T0Li2zA7VfYhgYsv5a7XbrojETYdicUPDHRI3gId6HwOXD_AUrDe59I6eh4X6mVPfmMWJ1ecBT6OzHEl_xjO0XX3UBxk1iMzjUyq-RGdfPklzixq-zq43XbfKkvHTNi3w7gSTnRxIaSgwW5LdEfIHuHbRaayzSZ4dbnlgqvsE2J2nc3Cm5AwqnLTPkbJvk2fW1HTLsNRzOM0XeZUhbkXNzjo_hPoUH240S-77rL5Z13iuOnAVEilHMU5oxaxyXBFPJwp0QxXkVEk9ydugky8tKkxccPm7TzEBhy7u7REcGey-ccdFT3HFdSbvq1M8JDt8MNDKvhtTa6jnqjacqQtblGx9d2worid9wXyD0hoNpht-a-FVAHrZEWkh0iNIGNPrWGK4vh5q3dJK0C80rGH1l3Z4i6cVBII_l-uM0CKwLOmkN46wf4a0ZoYBkJh9qgmEr6Lh-LRDP9lpuy173iY6O8HduXk22PRkiqJl8-pBOzi7SRcASFDRjjrrpWkmOpYe225J4x7tbmxyKPuulko1WtwME2vq2mgTDN0LPAlEKZ2apkc1jH3JeO-M6wS4-zCuKSyBvUZsqXJJN2d1WJFrcGDvJ_CCWAtFbtQ-j2ig5QJrwzqrWfy6uZck-wjy6Dugi9D5qeJ2QEqGs92LSCHYyHswLErSZRcFe7FKCRcanrA3rhtSYHFElFD0-iTKtbAEY78sygbAEt0hg1NPQpc26cWyScxrTNQnniU3LjB8WsIjRsdNMKhMBQxUKxOTy79DI7eKioBgl4X-SemBRV9KSPL2x2NeTH4obU11dy-LDpsLhWUFmzLmZBnBNAVF9i_SZHcIj1dogi62sCwDjl6bXa7ItFSCPHk_0840sMOelRGiZcJROhbMe9EXW_24Y__OWX08pm-IEETqQQEknnYoO5f--R6RAJPaBEuOSEFXO5R0Vy-cIIX54QCqIkchJI21lv_DF0boaKzPIPXCTNoW4ny1ZG_hbIHG1HP9cGQK69UPjUQuyDe-pLXJTbptcFmg2tkMyEm6EjciQRjb95SCExqjDLsDDFnPZ7COaJa9jnVgv_ye0CAFrGLx8SFga34ppNm_8r1q4j_1CgQlIdbBSBY4y8V6V-osj8gRfqmqrtMHkO7f9dy_erT46tDZ8slR6cl2LWd2l_YAzHHqX3uany_4lLR_cNQIkgGOGpr1jGFWB3o2KjNSxfDdigHF4KRqmBSxS5RNPn_pFiyeVCAdlB2-IjizE_bxI7niBy7PRVmOgc95lwavKaxldOQCyh3FzuDGJ415yvlgqYjlKwJVKUpHX9mBGI281ZKG8Pwj23iGWx8p8Eb3bETzU2B9za-claVml03UMu2Pio0PIKzyOR3TydpkwtqCvd1ADXZxB3CCCbqKkuenLBOgam5s4441lnbtQWLxlwT6gJvCu490Gm9guvrbwFCQyJ2gs=w1920-h940')"></div>
+                    <div id="picture-card-<%=i%>" class="picture-card" style="background-image: url('https://lh3.googleusercontent.com/fife/ALs6j_FmCcJjgO4XfABJeztorvhTi953xOzM0WISMT0lVya2Nmd-7HTiwANXn7TNb3SvM2TAGyoFuSItOZOSwvfD7i0fNE7dem8RvEv4QWR8Y1RxZ_dXmpJW0AzhAP4rAQt9V8wXm1mJkYHRZ5GanIvbYzRDf3smJSM8sFlchd_NIqU5qMH7vBlwV5kLATPDX4pVOnmhElff0t_me5Mf8T0Li2zA7VfYhgYsv5a7XbrojETYdicUPDHRI3gId6HwOXD_AUrDe59I6eh4X6mVPfmMWJ1ecBT6OzHEl_xjO0XX3UBxk1iMzjUyq-RGdfPklzixq-zq43XbfKkvHTNi3w7gSTnRxIaSgwW5LdEfIHuHbRaayzSZ4dbnlgqvsE2J2nc3Cm5AwqnLTPkbJvk2fW1HTLsNRzOM0XeZUhbkXNzjo_hPoUH240S-77rL5Z13iuOnAVEilHMU5oxaxyXBFPJwp0QxXkVEk9ydugky8tKkxccPm7TzEBhy7u7REcGey-ccdFT3HFdSbvq1M8JDt8MNDKvhtTa6jnqjacqQtblGx9d2worid9wXyD0hoNpht-a-FVAHrZEWkh0iNIGNPrWGK4vh5q3dJK0C80rGH1l3Z4i6cVBII_l-uM0CKwLOmkN46wf4a0ZoYBkJh9qgmEr6Lh-LRDP9lpuy173iY6O8HduXk22PRkiqJl8-pBOzi7SRcASFDRjjrrpWkmOpYe225J4x7tbmxyKPuulko1WtwME2vq2mgTDN0LPAlEKZ2apkc1jH3JeO-M6wS4-zCuKSyBvUZsqXJJN2d1WJFrcGDvJ_CCWAtFbtQ-j2ig5QJrwzqrWfy6uZck-wjy6Dugi9D5qeJ2QEqGs92LSCHYyHswLErSZRcFe7FKCRcanrA3rhtSYHFElFD0-iTKtbAEY78sygbAEt0hg1NPQpc26cWyScxrTNQnniU3LjB8WsIjRsdNMKhMBQxUKxOTy79DI7eKioBgl4X-SemBRV9KSPL2x2NeTH4obU11dy-LDpsLhWUFmzLmZBnBNAVF9i_SZHcIj1dogi62sCwDjl6bXa7ItFSCPHk_0840sMOelRGiZcJROhbMe9EXW_24Y__OWX08pm-IEETqQQEknnYoO5f--R6RAJPaBEuOSEFXO5R0Vy-cIIX54QCqIkchJI21lv_DF0boaKzPIPXCTNoW4ny1ZG_hbIHG1HP9cGQK69UPjUQuyDe-pLXJTbptcFmg2tkMyEm6EjciQRjb95SCExqjDLsDDFnPZ7COaJa9jnVgv_ye0CAFrGLx8SFga34ppNm_8r1q4j_1CgQlIdbBSBY4y8V6V-osj8gRfqmqrtMHkO7f9dy_erT46tDZ8slR6cl2LWd2l_YAzHHqX3uany_4lLR_cNQIkgGOGpr1jGFWB3o2KjNSxfDdigHF4KRqmBSxS5RNPn_pFiyeVCAdlB2-IjizE_bxI7niBy7PRVmOgc95lwavKaxldOQCyh3FzuDGJ415yvlgqYjlKwJVKUpHX9mBGI281ZKG8Pwj23iGWx8p8Eb3bETzU2B9za-claVml03UMu2Pio0PIKzyOR3TydpkwtqCvd1ADXZxB3CCCbqKkuenLBOgam5s4441lnbtQWLxlwT6gJvCu490Gm9guvrbwFCQyJ2gs=w1920-h940')"></div>
                     </a>
                     <figcaption>
                         <span class="cat-title">Decor</span>
                         <a href="gallery" class="more-button">Enter</a>
                     </figcaption>
                 </figure>
-                <%}%>
+                <%}%> -->
 
             </div>
         </div>
@@ -42,5 +44,34 @@
         <%- include('partials/footer.ejs') %>
     </footer>
 </body>
+
+<script>
+const delay = ms => new Promise(res => setTimeout(res, ms));
+const categoryGrid = document.querySelector('#category-grid');
+const picturesGrid = document.querySelector('.pictures-grid');
+const imgLink = "https://lh3.googleusercontent.com/fife/ALs6j_FmCcJjgO4XfABJeztorvhTi953xOzM0WISMT0lVya2Nmd-7HTiwANXn7TNb3SvM2TAGyoFuSItOZOSwvfD7i0fNE7dem8RvEv4QWR8Y1RxZ_dXmpJW0AzhAP4rAQt9V8wXm1mJkYHRZ5GanIvbYzRDf3smJSM8sFlchd_NIqU5qMH7vBlwV5kLATPDX4pVOnmhElff0t_me5Mf8T0Li2zA7VfYhgYsv5a7XbrojETYdicUPDHRI3gId6HwOXD_AUrDe59I6eh4X6mVPfmMWJ1ecBT6OzHEl_xjO0XX3UBxk1iMzjUyq-RGdfPklzixq-zq43XbfKkvHTNi3w7gSTnRxIaSgwW5LdEfIHuHbRaayzSZ4dbnlgqvsE2J2nc3Cm5AwqnLTPkbJvk2fW1HTLsNRzOM0XeZUhbkXNzjo_hPoUH240S-77rL5Z13iuOnAVEilHMU5oxaxyXBFPJwp0QxXkVEk9ydugky8tKkxccPm7TzEBhy7u7REcGey-ccdFT3HFdSbvq1M8JDt8MNDKvhtTa6jnqjacqQtblGx9d2worid9wXyD0hoNpht-a-FVAHrZEWkh0iNIGNPrWGK4vh5q3dJK0C80rGH1l3Z4i6cVBII_l-uM0CKwLOmkN46wf4a0ZoYBkJh9qgmEr6Lh-LRDP9lpuy173iY6O8HduXk22PRkiqJl8-pBOzi7SRcASFDRjjrrpWkmOpYe225J4x7tbmxyKPuulko1WtwME2vq2mgTDN0LPAlEKZ2apkc1jH3JeO-M6wS4-zCuKSyBvUZsqXJJN2d1WJFrcGDvJ_CCWAtFbtQ-j2ig5QJrwzqrWfy6uZck-wjy6Dugi9D5qeJ2QEqGs92LSCHYyHswLErSZRcFe7FKCRcanrA3rhtSYHFElFD0-iTKtbAEY78sygbAEt0hg1NPQpc26cWyScxrTNQnniU3LjB8WsIjRsdNMKhMBQxUKxOTy79DI7eKioBgl4X-SemBRV9KSPL2x2NeTH4obU11dy-LDpsLhWUFmzLmZBnBNAVF9i_SZHcIj1dogi62sCwDjl6bXa7ItFSCPHk_0840sMOelRGiZcJROhbMe9EXW_24Y__OWX08pm-IEETqQQEknnYoO5f--R6RAJPaBEuOSEFXO5R0Vy-cIIX54QCqIkchJI21lv_DF0boaKzPIPXCTNoW4ny1ZG_hbIHG1HP9cGQK69UPjUQuyDe-pLXJTbptcFmg2tkMyEm6EjciQRjb95SCExqjDLsDDFnPZ7COaJa9jnVgv_ye0CAFrGLx8SFga34ppNm_8r1q4j_1CgQlIdbBSBY4y8V6V-osj8gRfqmqrtMHkO7f9dy_erT46tDZ8slR6cl2LWd2l_YAzHHqX3uany_4lLR_cNQIkgGOGpr1jGFWB3o2KjNSxfDdigHF4KRqmBSxS5RNPn_pFiyeVCAdlB2-IjizE_bxI7niBy7PRVmOgc95lwavKaxldOQCyh3FzuDGJ415yvlgqYjlKwJVKUpHX9mBGI281ZKG8Pwj23iGWx8p8Eb3bETzU2B9za-claVml03UMu2Pio0PIKzyOR3TydpkwtqCvd1ADXZxB3CCCbqKkuenLBOgam5s4441lnbtQWLxlwT6gJvCu490Gm9guvrbwFCQyJ2gs=w1920-h940"
+
+async function loadImages(){
+    for (let index = 0; index < 4; index++) {
+        if (index<3){
+            divisor = ((index%3)+1)
+            picturesGrid.style.gridTemplateColumns = Array(divisor+1).join(((100/divisor)+"% "))
+        }else{ picturesGrid.style.gridTemplateColumns = "33% 33% 33%"}
+        
+        categoryGrid.insertAdjacentHTML('beforeend','<figure id="category-'+index+'" class="picture-card-container"></figure>')
+        $("#category-"+index).fadeOut(1)
+        categoryElem = document.querySelector('#category-'+index);
+        categoryElem.insertAdjacentHTML('beforeend','<a href="gallery"><div style="'+"background-image: url('"+imgLink+"')"+'" id="picture-card-'+index+'" class="picture-card"></div></a>')
+        categoryElem.insertAdjacentHTML('beforeend','<figcaption><span class="cat-title">Decor</span><a href="gallery" class="more-button">Enter</a></figcaption>')
+        $("#category-"+index).fadeIn()
+        console.log("wait")
+        await delay(1000)
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    loadImages()
+})
+</script>
 
 </html>
