@@ -1,11 +1,44 @@
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+const numOfImgs = 4
+
 document.addEventListener('DOMContentLoaded', function () {
     var videos = document.querySelectorAll('.carousel img');
     const vidsDiv = document.querySelector('.carousel');
     var currentIndex = 0;
 
     async function doCarouselArrangements(currentIndex){
+        await delay(1000); // Wait for animation to finish before moving things around
+        vidsDiv.style.transition = "none"; // Temporarily disable transition animation (prepare for moving view)
+        
+        video0 = document.querySelector('#image'+(currentIndex));
+        video0.style.order="0";
+        
+        // Get Previous Video
+        if (currentIndex == 0){
+            video0 = document.querySelector('#image'+(numOfImgs-1)); // Get previous video
+            video0.style.order=(numOfImgs*2).toString() ;
+        }else{
+            video0 = document.querySelector('#image'+(currentIndex-1)); // Get previous video
+            video0.style.order=(currentIndex+numOfImgs).toString() ;
+        }
+
+        // Get Next Video
+        if (currentIndex == (numOfImgs-1)){
+            video0 = document.querySelector('#image0'); 
+            video0.style.order=(1).toString() ;
+        }else{
+            video0 = document.querySelector('#image'+(currentIndex+1)); 
+            video0.style.order=(1).toString() ;
+        }
+        
+        vidsDiv.style.transform = "translateX("+(0*(-25))+"%)" // Move view backwards to compensate for deleting previous video
+        vidsDiv.style.transform = "translateX("+(0)+"%)" // Move view backwards to compensate for deleting previous video
+
+        await delay(1000); // Wait for view move to finish before re-enabling animation 
+        vidsDiv.style.transition = "transform 1s ease-in-out";
+    }
+    async function doCarouselArrangementsOld(currentIndex){
         await delay(1000); // Wait for animation to finish before moving things around
         let video0;
         vidsDiv.style.transition = "none"; // Temporarily disable transition animation (prepare for moving view)
@@ -48,6 +81,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function doCarouselArrangements(currentIndex){
         await delay(1000); // Wait for animation to finish before moving things around
+        vidsDiv.style.transition = "none"; // Temporarily disable transition animation (prepare for moving view)
+        
+        video0 = document.querySelector('#video'+(currentIndex));
+        video0.style.order="0";
+        
+        // Get Previous Video
+        if (currentIndex == 0){
+            video0 = document.querySelector('#video'+(numOfImgs-1)); // Get previous video
+            video0.style.order=(numOfImgs*2).toString() ;
+        }else{
+            video0 = document.querySelector('#video'+(currentIndex-1)); // Get previous video
+            video0.style.order=(currentIndex+numOfImgs).toString() ;
+        }
+
+        // Get Next Video
+        if (currentIndex == (numOfImgs-1)){
+            video0 = document.querySelector('#video0'); 
+            video0.style.order=(1).toString() ;
+        }else{
+            video0 = document.querySelector('#video'+(currentIndex+1)); 
+            video0.style.order=(1).toString() ;
+        }
+        
+        vidsDiv.style.transform = "translateX("+(0*(-25))+"%)" // Move view backwards to compensate for deleting previous video
+        vidsDiv.style.transform = "translateX("+(0)+"%)" // Move view backwards to compensate for deleting previous video
+
+        await delay(1000); // Wait for view move to finish before re-enabling animation 
+        vidsDiv.style.transition = "transform 1s ease-in-out";
+    }
+
+    async function doCarouselArrangementsOld(currentIndex){
+        await delay(1000); // Wait for animation to finish before moving things around
         let video0;
         vidsDiv.style.transition = "none"; // Temporarily disable transition animation (prepare for moving view)
         if (currentIndex == 0){
@@ -63,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function () {
         await delay(100); // Wait for view move to finish before re-enabling animation 
         vidsDiv.style.transition = "transform 1s ease-in-out";
         vidsDiv.insertAdjacentHTML('beforeend',video0.outerHTML)        
-
     }
 
 
