@@ -25,7 +25,9 @@ yarn-error.log*
 # custom
 .env
 sessions.db
-public/images/*
+# public/images/*
+public/images/gallery/*
+public/images/galleryv2/*
 public/video/*
 public/video.zip
 public/images.zip
