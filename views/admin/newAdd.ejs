@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>New Add</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/9.0.2/superagent.min.js" integrity="sha512-e84UZs/qgoc2ukW/tXc+jZLbZcgphbBWspjOjC3YBaVK+4F6rL0vF8ATmmEUsWRjmci/dUEsZuZdizb9bjatdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.css" integrity="sha512-087vysR/jM0N5cp13Vlp+ZF9wx6tKbvJLwPO8Iit6J7R+n7uIMMjg37dEgexOshDmDITHYY5useeSmfD1MYiQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.js" integrity="sha512-lR8d1BXfYQuiqoM/LeGFVtxFyspzWFTZNyYIiE5O2CcAGtTCRRUMLloxATRuLz8EmR2fYqdXYlrGh+D6TVGp3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        #crop-container {
+            display: block;
+            /* This rule is very important, please don't ignore this */
+            /* width: 50vw; */
+            height: 50vh;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Step 1: Select images -->
+    <div id="Image Selector">
+        <h1>Upload Section</h1>
+        <!-- <form>
+            <span>Upload: </span><input id="file" type="file" name="myFile">
+        </form> -->
+        <div>
+            <span>Multi Upload: </span><input id="file" type="file" name="filefield" multiple="multiple">
+        </div>
+        <ul id="imgList">
+            
+        </ul>
+    </div>
+
+    <!-- Step 2: Thumbnail Creator -->
+    <div id="croppingTest">
+        <h1>Thumbnail Selector</h1>
+        <div id="crop-container">
+            <img id="image" src="http://localhost:3000/images/gallery/img1.jpg" referrerPolicy="no-referrer">
+        </div>
+    </div>
+    <form action="/admin/add" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" required>
+        
+        <label for="tags">Tags (comma separated):</label>
+        <input type="text" name="tags" id="tags" required>
+        
+        <label for="group">Group:</label>
+        <input type="text" name="group" id="group">
+        
+        <label for="type">Type:</label>
+        <select name="type" id="type" required>
+            <option value="video">Video</option>
+            <option value="image">Image</option>
+        </select>
+        
+        <label for="link">Link:</label>
+        <input type="text" name="link" id="link" required>
+        
+        <button type="submit">Add Card</button>
+    </form>
+
+
+    <script>
+        var image = document.getElementById('image');
+        var cropper = new Cropper(image, {
+            aspectRatio: 14 / 9,
+        });
+        var fileList
+        function switchImg(i){
+            var file = $('#file')[0].files[i];
+            if (file && file.type === 'image/jpeg') {
+                var reader = new FileReader();
+                reader.onloadend = function (e) {
+                    $('#image').attr('src', e.target.result);
+                    cropper.replace(e.target.result)
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+        $('#file')[0].onchange = function () {
+            fileList = $('#file')[0].files
+            for(var i=0;i<fileList.length;i++){
+                $('#imgList').append('<button onclick=switchImg('+i+')><li>'+fileList[i].name+'</li></button>');
+            }
+
+            var file = $('#file')[0].files[0];
+            if (file && file.type === 'image/jpeg') {
+                var reader = new FileReader();
+                reader.onloadend = function (e) {
+                    // var data = reader.result;
+                    // $('#image').
+                    $('#image').attr('src', e.target.result);
+                    console.log("hi")
+                    // gd_uploadFile('img.jpg', 'image/jpeg', data, "");
+
+                }
+                reader.readAsDataURL(file);
+            }
+        };
+    </script>
+
+
+</body>
+</html>

@@ -21,13 +21,16 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
 });
 
 router.get('/googleDriveTest', ensureAuthenticated, async(req,res) =>{
+    // testPage = 'googleDriveTest'
+    testPage = 'newAdd'
+
     let nowTime = (new Date()).getTime();
     if (tokVar['token'] == ""){
         console.log("empty tokVar")
         auth.getAccessToken()
         .then((token) => {
             tokVar['token'] = {"token":token,"time":nowTime}
-            res.render('admin/googleDriveTest', { token });
+            res.render('admin/'+testPage, { token });
         })
         .catch((err) => {
             console.log("err: ", err)
@@ -39,7 +42,7 @@ router.get('/googleDriveTest', ensureAuthenticated, async(req,res) =>{
         auth.getAccessToken()
         .then((token) => {
             tokVar['token'] = {"token":token,"time":nowTime}
-            res.render('admin/googleDriveTest', { token });
+            res.render('admin/'+testPage, { token });
         })
         .catch((err) => {
             console.log("err: ", err)
@@ -50,7 +53,7 @@ router.get('/googleDriveTest', ensureAuthenticated, async(req,res) =>{
         let token = tokVar['token']
         const diff = (nowTime-tokVar['token']["time"])/(60*1000)
         console.log("use "+ diff+ " minutes old tokVar")
-        res.render('admin/googleDriveTest', { token });
+        res.render('admin/'+testPage, { token });
     }
 });
 
