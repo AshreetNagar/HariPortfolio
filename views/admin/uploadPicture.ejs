@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>New Add</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/9.0.2/superagent.min.js" integrity="sha512-e84UZs/qgoc2ukW/tXc+jZLbZcgphbBWspjOjC3YBaVK+4F6rL0vF8ATmmEUsWRjmci/dUEsZuZdizb9bjatdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.css" integrity="sha512-087vysR/jM0N5cp13Vlp+ZF9wx6tKbvJLwPO8Iit6J7R+n7uIMMjg37dEgexOshDmDITHYY5useeSmfD1MYiQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.js" integrity="sha512-lR8d1BXfYQuiqoM/LeGFVtxFyspzWFTZNyYIiE5O2CcAGtTCRRUMLloxATRuLz8EmR2fYqdXYlrGh+D6TVGp3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        #crop-container {
+            display: block;
+            /* This rule is very important, please don't ignore this */
+            /* width: 50vw; */
+            height: 50vh;
+        }
+
+        #addMediaForm{
+            visibility: hidden;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Step 1: Select images -->
+    <div id="Image Selector">
+        <h1>Upload Section</h1>
+        <!-- <form>
+            <span>Upload: </span><input id="file" type="file" name="myFile">
+        </form> -->
+        <div>
+            <!-- <span>1) Please upload one or more images </span><input id="file" type="file" name="filefield" multiple="multiple"> -->
+            <span>1) Please upload one image </span><input id="file" type="file" name="filefield">
+
+        </div>
+        <ul id="imgList">
+            
+        </ul>
+    </div>
+
+    <!-- Step 2: Thumbnail Creator -->
+    <div id="croppingTest">
+        <h1>Thumbnail Selector</h1>
+        <div id="crop-container">
+            <img id="image" src="" referrerPolicy="no-referrer">
+        </div>
+    </div>
+    <form id="addMediaForm" action="/admin/add" method="POST">
+        <label for="title">Title:</label>
+        <input id="title" type="text" name="title" id="title" required>
+        
+        <div id="caption">
+            <label for="caption">Caption:</label>
+            <input id="caption" type="text" name="caption" id="caption" required>
+        </div>
+
+
+        <div id="tagSection">
+            <label for="tags">Tags:</label>
+            <select name="tags" id="tags" multiple>
+            </select>
+            <input placeholder="To add a new tag type then button" type="text" id="tagNew">
+            <input value="Add New Tag" type="button" onclick="addTagOrGroup('tag')">
+        </div>
+
+        <div id="groupSection">
+            <label for="groups">Groups:</label>
+            <select name="groups" id="groups" multiple>
+            </select>
+            <input placeholder="To add a new groups type then button" type="text" id="groupNew">
+            <input value="Add New group" type="button" onclick="addTagOrGroup('group')">
+        </div>
+
+
+        <div id="add_section">
+            <label for="type">Type:</label>
+            <select name="type" id="type" required>
+                <option value="youtube_embed">Youtube Link</option>
+                <!-- <option value="video">Video</option> -->
+                <option value="image">Image</option>
+            </select>            
+            <label for="link">Link:</label>
+            <input type="text" name="link" id="link" required>
+        </div>
+
+
+        <div id="add_section">
+            <button onclick="addImage()" type="submit">Add Card</button>
+        </div>
+
+    </form>
+
+
+    <script>
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+
+        var cropper;       
+        var currentImageIdx; 
+        const token = "<%= token %>"
+        console.log(token)
+        function reloadTagsOrGroups(type){
+            superagent.get('/admin/'+type).send().
+            end(function (err, res) {
+                JSON.parse(res.text).forEach(element => {
+                    $("#"+type+"s").append('<option value="'+element["_id"]+'">'+element[type+"Name"]+'</option>')
+                });
+                // $("#tags").append('<option value="newTag">New Tag</option>')
+                console.log("Error\\/");
+                console.log(err)
+            });
+        }
+
+        $( document ).ready(function() {
+
+
+        });
+
+
+        function addTagOrGroup(ok) {
+            if(!$('#tagNew').val()){
+                alert("Please fill the box next to the button")
+                return false;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/admin/tag',
+                data: { tagName: $('#tagNew').val() }
+            }).then(()=>{
+                reloadTagsOrGroups("tag")
+            });
+            return true;
+        }
+
+        function switchImg(i){
+            var file = $('#file')[0].files[i];
+            if (file && file.type.includes("image")) {
+                var reader = new FileReader();
+                reader.onloadend = function (e) {
+                    $('#image').attr('src', e.target.result);
+                    cropper.replace(e.target.result)
+                    currentImageIdx = i
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        
+        $('#file')[0].onchange = function () {
+            var fileList = $('#file')[0].files
+            for(var i=0;i<fileList.length;i++){
+                $('#imgList').append('<button onclick=switchImg('+i+')><li>'+fileList[i].name+'</li></button>');
+            }
+            var file = $('#file')[0].files[0];
+            if (file && file.type.includes("image")) {
+                var reader = new FileReader();
+                reader.onloadend = async function (e) {
+                    var image = document.getElementById('image');
+                    $('#image').attr('src', e.target.result);
+                    cropper = new Cropper(image, {
+                        aspectRatio: 16 / 9,
+                    });
+                    reloadTagsOrGroups("tag")
+                    reloadTagsOrGroups("group")
+                    $('#addMediaForm').css("visibility","visible")
+                    currentImageIdx = 0
+                }
+                reader.readAsDataURL(file);
+            }
+        };
+
+        async function fetchToJson(url,type,data,contentType) {
+            var body = {
+                method: type,
+                headers: {
+                    // "Content-type": contentType,
+                    "Authorization": 'Bearer ' + token
+                }
+            }
+            if (type=="POST"){
+                body["body"] = data
+            }
+            const response = await fetch(url, body)
+            const responseJson = await response.json()
+            return responseJson            
+        }
+    
+        async function gd_uploadFile(data,filename,contentType) {
+            var callback
+            const boundary = '-------314159265358979323846';
+            const delimiter = "\r\n--" + boundary + "\r\n";
+            const close_delim = "\r\n--" + boundary + "--";
+
+            contentType = contentType || "text/html";
+            var metadata = {
+                name: name,
+                'mimeType': contentType
+            };
+
+            var multipartRequestBody =
+                delimiter +  'Content-Type: application/json\r\n\r\n' +
+                JSON.stringify(metadata) +
+                delimiter +
+                'Content-Type: ' + contentType + '\r\n';
+
+            //Transfer images as base64 string.
+            if (contentType.indexOf('image/') === 0) {
+                var pos = data.indexOf('base64,');
+                multipartRequestBody += 'Content-Transfer-Encoding: base64\r\n' + '\r\n' +
+                    data.slice(pos < 0 ? 0 : (pos + 'base64,'.length));
+            } else {
+                multipartRequestBody +=  + '\r\n' + data;
+            }
+            multipartRequestBody += close_delim;
+
+            if (!callback) { callback = function(file) { console.log("Update Complete ", file) }; }
+
+            const link = await superagent.post('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart').
+                set('Content-Type', 'multipart/form-data;  boundary="' + boundary + '"').
+                set('Authorization', 'Bearer ' + token).
+                send(multipartRequestBody)
+                // .
+                // end(async function () {
+                //     console.log(arguments);
+                //     uploadImgResponseJson = arguments[1].body
+                //     console.log(uploadImgResponseJson)
+                //     console.log(uploadImgResponseJson.body)
+                //     console.log(uploadImgResponseJson.id)
+                //     await shareFile(uploadImgResponseJson.id)
+                //     console.log("get file")
+                //     await delay(2000)
+                //     const imgfileJson = await getFile(uploadImgResponseJson.id)
+                //     console.log(imgfileJson)
+                //     console.log("thumbnail link "+imgfileJson.thumbnailLink)
+                //     thumbnailLink = imgfileJson.thumbnailLink
+                //     return thumbnailLink
+                // });
+            return link.body
+        }
+
+        async function getFile(fileID){
+            const url = "https://www.googleapis.com/drive/v3/files/"+fileID+"?fields=webContentLink,thumbnailLink"
+            return (await fetchToJson(url,"GET",null))
+        }
+
+        async function shareFile(fileID){
+            const body = JSON.stringify({
+                "type": "anyone",
+                "role":"reader"
+            })
+            const url = "https://www.googleapis.com/drive/v3/files/"+fileID+"/permissions"
+            return (await fetchToJson(url,"POST",body))
+        }
+
+        // On upload
+        //  upload thumbnail to googledrive
+        //  POST to backend
+        //  pop out of image list
+        async function addImage(){
+            // When beginning to upload, change to different image
+                // If only 1 image in list, do block screen with loading sign? 
+
+            // 
+
+            var link
+            var thumbnailLink
+            var imgFile = $('#file')[0].files[currentImageIdx]
+            
+            
+            console.log("upload thum")
+            var img = new Image();
+            img.src = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+            var canvas = document.createElement('canvas');
+            var width = 1280;
+            var height = 720;
+            canvas.width = width;
+            canvas.height = height;
+            var ctx = canvas.getContext('2d');
+            img.onload = await async function() {
+                // Image is loaded; now, resize it
+                ctx.drawImage(img, 0, 0, width, height);
+                const uploadResponseJson = await gd_uploadFile( canvas.toDataURL(),'thumb_'+imgFile.name,'image/jpeg');
+                await shareFile(uploadResponseJson.id)
+                console.log("get file")
+                thumbnailLink = "https://drive.google.com/thumbnail?sz=w1080-h1080&id="+uploadResponseJson.id
+                console.log("doone canvas")
+
+                console.log("upload img")
+                const uploadImgResponseJson = await gd_uploadFile($('#image').attr('src'),imgFile.name,imgFile.type);
+                console.log(uploadImgResponseJson.id)
+                await shareFile(uploadImgResponseJson.id)
+                console.log("get file")
+                link = "https://drive.google.com/thumbnail?sz=w1000-h1000&id="+uploadImgResponseJson.id
+            
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/add',
+                    data: { 
+                        title: $('#title').val(), 
+                        caption: $('#caption').val(), 
+                        tags: $('#tags').val(), 
+                        groups: $('#groups').val(), 
+                        type: $('#type').val(), 
+                        link: link, 
+                        thumbnailLink: thumbnailLink,
+                        metadata: {
+                            "gDrive_thumbID": uploadResponseJson.id,
+                            "gDrive_imgID": uploadImgResponseJson.id
+                        }
+                    }
+                }).then(()=>{
+                    // reloadTagsOrGroups("tag")
+                    
+                });
+
+            };
+        }
+
+
+    </script>
+
+
+</body>
+</html>

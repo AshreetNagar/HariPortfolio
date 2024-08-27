@@ -91,14 +91,29 @@
 </script>
 <!-- Google Drive Scripts -->
 <script>
+
     const token = "<%= token %>"
-    // console.log("the token is\/")
-    // console.log(token)
+    console.log("the token is\/")
+    console.log(token)
+    
     function hideGDriveSection(){
         document.getElementById("googleDriveTest").style = "display: none"
     }
     function showGDriveSection(){
         document.getElementById("googleDriveTest").style = "display: block"
+    }
+
+    function deleteFile(fileID){
+        fetch("https://www.googleapis.com/drive/v3/files/"+fileID, {
+            method: "DELETE",
+            headers: {"Authorization": 'Bearer ' + token}
+        })
+        .then((response) =>{
+            console.log(response.status)
+            console.log(response.body )
+            return response.json()
+        })
+        .then((json) => console.log(json));
     }
 
 
@@ -117,7 +132,7 @@
             json.files.forEach(element => {
                 var li = document.createElement("li");
                 var btn = document.createElement("button")
-                btn.onclick = function(){console.log(element["id"]);reloadList();}
+                btn.onclick = function(){console.log(element["id"]);deleteFile(element["id"])}
                 btn.appendChild(document.createTextNode("delete"))
                 li.appendChild(btn);
                 li.appendChild(document.createTextNode(" "+element["name"]));
@@ -233,7 +248,7 @@
             }
         })
         .then((response) =>{
-            console.log(response.status)
+            console.log(response)
             return response.json()
         })
         .then((json) => console.log(json));
@@ -250,6 +265,7 @@
             var reader = new FileReader();
             reader.onloadend = function () {
                 var data = reader.result;
+                console.log(data)
                 gd_uploadFile('img.jpg', 'image/jpeg', data, "");
             }
             reader.readAsDataURL(file);

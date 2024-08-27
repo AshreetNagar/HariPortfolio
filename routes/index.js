@@ -72,5 +72,9 @@ router.get('/debug', (req,res) => {
     res.render('debug');
 });
 
+router.get('/media', async (req,res)=>{
+    const mediaItems = await Media.find();
+    res.json(mediaItems)
+})
 
 module.exports = router;
