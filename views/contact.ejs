@@ -125,12 +125,6 @@
                 type: 'POST',
                 url: '/contact',
                 data: data
-            }).then(()=>{
-                // window.location.href = "/admin/dashboard";                
-            }).fail((error)=>{
-                console.error(error)
-                event.preventDefault();
-                alert('Error sending message, please try again')
             });
         })
     </script>
