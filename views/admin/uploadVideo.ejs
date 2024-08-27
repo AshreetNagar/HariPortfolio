@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>New Add</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/9.0.2/superagent.min.js" integrity="sha512-e84UZs/qgoc2ukW/tXc+jZLbZcgphbBWspjOjC3YBaVK+4F6rL0vF8ATmmEUsWRjmci/dUEsZuZdizb9bjatdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.css" integrity="sha512-087vysR/jM0N5cp13Vlp+ZF9wx6tKbvJLwPO8Iit6J7R+n7uIMMjg37dEgexOshDmDITHYY5useeSmfD1MYiQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.js" integrity="sha512-lR8d1BXfYQuiqoM/LeGFVtxFyspzWFTZNyYIiE5O2CcAGtTCRRUMLloxATRuLz8EmR2fYqdXYlrGh+D6TVGp3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="../scripts/common.js"></script>
+
+
+    <style>
+        #yt-thumb {
+            /* width: 70vw; */
+            height: 25vh;
+            display: flex;
+        }
+        #yt-check_section{
+            visibility: hidden;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- Step 1: Select images -->
+    <div id="Image Selector">
+        <h1>Upload Video</h1>
+        <div>
+            <div id="form">
+                <label for="title">Title:</label>
+                <input id="title" type="text" name="title" id="title" required>
+                
+                <div id="link_section">
+                    <label for="link">YOUTUBE Link:</label>
+                    <input type="text" name="link" id="link" required>
+                </div>
+
+                <div id="captionSection">
+                    <label for="caption">Caption:</label>
+                    <input id="caption" type="text" name="caption" required>
+                </div>
+        
+        
+                <div id="tagSection">
+                    <label for="tags">Tags:</label>
+                    <select name="tags" id="tags" multiple>
+                    </select>
+                    <input placeholder="To add a new tag type then button" type="text" id="tagNew">
+                    <input value="Add New Tag" type="button" onclick="addTagOrGroup('tag')">
+                </div>
+        
+                <div id="groupSection">
+                    <label for="groups">Groups:</label>
+                    <select name="groups" id="groups" multiple>
+                    </select>
+                    <!-- <input placeholder="To add a new groups type then button" type="text" id="groupNew"> -->
+                    <!-- <input value="Add New group" type="button" onclick="addTagOrGroup('group')"> -->
+                </div>
+
+                <button onclick="checkVideo()" type="submit">DONE (CHECK IF YOUTUBE LINK IS VALID BEFORE UPLOADING)</button>
+            </div>
+
+            <div id="yt-check_section">
+                <h2>IF SOMETHING IS WRONG HERE, CLICK BACK AND MAKE SURE THE LINK IS VALID</h2>
+                <div>
+                    <button onclick="showForm()" type="submit">Back</button>
+                    <button onclick="addVideo()" type="submit">This looks good, submit</button>
+                </div>
+                <h3>Thumbnail:</h3>
+                <img id="yt-thumb"></img>
+                <h3>Video (make sure this plays):</h3>
+                <div id="yt-content"></div>
+
+            </div>
+
+            <!-- <div id="add_section">
+                <button onclick="addVideo()" type="submit">Add Card</button>
+            </div> -->
+
+    
+        </div>
+        <ul id="imgList">
+            
+        </ul>
+    </div>
+
+
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        $( document ).ready(function() {
+            reloadTagsOrGroups("tag")
+            reloadTagsOrGroups("group")
+        });
+
+        async function showForm(){
+            $("#form").css("visibility","visible")
+            $("#yt-check_section").css("visibility","hidden")
+        }
+
+        async function checkVideo(){
+            try {
+                const yt = $('#link').val()
+                const yt_id = (new URLSearchParams((new URL(yt.startsWith("http") ? yt : `https://${yt}`)).searchParams).get('v'));
+                if (!yt_id){
+                    throw new Error("no yt id, invalid link?");
+                }
+                $("#form").css("visibility","hidden")
+                $("#yt-check_section").css("visibility","visible")
+
+                if ($('#title').val() == ""){
+                    alert("Title must be filled in")
+                    return
+                }
+                if ($('#link').val() == ""){
+                    alert("Link must be filled in")
+                    return
+                }
+
+                $('#yt-content').remove()
+                document.getElementById('yt-check_section').insertAdjacentHTML('beforeend',`<div id="yt-content"></div>`)
+                $('#yt-thumb').attr('src',"https://i.ytimg.com/vi/"+yt_id+"/maxresdefault.jpg")
+                var player2 = new YT.Player('yt-content', {
+                    videoId: yt_id,
+                    playerVars: {
+                        'playsinline': 1
+                    },
+                })
+            } catch (error) {
+                console.error(error)
+                alert("Link appears to be invalid")
+                $("#form").css("visibility","visible")
+                $("#yt-check_section").css("visibility","hidden")
+                return
+            }
+        }
+
+        async function addVideo(){
+            if ($('#title').val() == ""){
+                alert("Title must be filled in")
+                return
+            }
+            if ($('#link').val() == ""){
+                alert("Link must be filled in")
+                return
+            }
+
+
+            const yt = $('#link').val()
+            const yt_id = (new URLSearchParams((new URL(yt.startsWith("http") ? yt : `https://${yt}`)).searchParams).get('v'));
+            console.log($('#caption').val()) 
+
+            $.ajax({
+                    type: 'POST',
+                    url: '/admin/add',
+                    data: { 
+                        title: $('#title').val(), 
+                        caption: $('#caption').val(), 
+                        tags: $('#tags').val(), 
+                        groups: $('#groups').val(), 
+                        type: "youtube_embed", 
+                        link: yt_id, 
+                        thumbnailLink: "https://i.ytimg.com/vi/"+yt_id+"/maxresdefault.jpg",
+                    }
+                }).then(()=>{
+                    alert('done')
+                    window.location.href = "/admin/dashboard";
+                    // reloadTagsOrGroups("tag")
+                    
+                }).fail(()=>{
+                    alert('error')
+                });
+        }
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/9.0.2/superagent.min.js" integrity="sha512-e84UZs/qgoc2ukW/tXc+jZLbZcgphbBWspjOjC3YBaVK+4F6rL0vF8ATmmEUsWRjmci/dUEsZuZdizb9bjatdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <title>Debug</title>
+</head>
+<body>
+    <header>
+    </header>
+    <div id="main-content">
+        <h1>Dimensions Section</h1>
+        <h2 id="msg1"></h2>
+    </div>
+    <div id="other-content">
+        <h1>Tag Section</h1>
+        <h2>Tag List</h2>
+        <button onclick="listResource('tag')" type="submit">List Tag (Console)</button>
+        <h2>New Tag</h2>
+        <form method="POST" action="/admin/tag">
+            <input type="text" name="tagName" id="tagName" required>
+            <button type="submit">Add Tag</button>
+        </form>
+
+        <h1>Group Section</h1>
+        <h2>Group List</h2>
+        <button onclick="listResource('group')" type="submit">List Group (Console)</button>
+        <h2>New Group</h2>
+        <form method="POST" action="/admin/group">
+            <input type="text" name="groupName" id="groupName" required>
+            <button type="submit">Add Group</button>
+        </form>
+    </div>
+
+    <footer>
+    </footer>
+
+    <script>
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+        async function listResource(resourceName){
+            superagent.get('/admin/'+resourceName).
+            send().
+            end(function (err, res) {
+                alert(res.text);
+                console.log(JSON.parse(res.text));
+                console.log(err);
+            });
+        }
+
+        async function updateViewDimensions(){
+            while(true){
+                let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+                let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+                document.getElementById("msg1").innerHTML = vw+"x"+vh;
+                await delay(2000)
+                console.log("stop")
+            }
+
+        }
+        updateViewDimensions()
+        console.log("stop")
+    </script>
+
+</body>
+</html>
