@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
     $.ajax({
         type: 'GET',
         url: '/media',
+        data: {
+            groupId : groupId
+        }
     }).then((responseBody)=>{
         // for (let index = 0; index < 4; index++) {
         //     data.push({
@@ -171,3 +174,33 @@ function showTag(){
         groupContent.style.maxHeight = groupContent.scrollHeight + "px";
     } 
 }
+
+// ---------------------- Tag section  ----------------------
+var tagList = []
+getTags()
+async function getTags(nameQuery){
+    const responseBody = await $.ajax({
+        type: 'GET',
+        url: '/tags',
+        data: {
+            nameQuery : nameQuery
+        }
+    })
+    tagList = responseBody
+    $('#tag-checkbox-section').empty()
+    tagList.forEach(element => {
+        console.log(element)
+        $("#tag-checkbox-section").append('<input type="checkbox" checked="checked"><span class="checkmark"></span>'+element.tagName+'<br>')
+        
+    });
+    return responseBody
+}
+$('#tag-search-box').on('input',async function(){
+    console.log("typed")
+    const query = $('#tag-search-box').val()
+    await delay(500)
+    if (query != $('#tag-search-box').val()){
+        return
+    }
+    console.log(await getTags(query))
+})

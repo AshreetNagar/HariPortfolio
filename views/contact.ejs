@@ -59,11 +59,12 @@
                             <label for="topic">Choose a Topic <span class="required">*</span></label>
                             <select id="topic" name="topic" required>
                                 <option value="">Select a topic</option>
-                                <option value="filler1">Filler 1</option>
-                                <option value="filler2">Filler 2</option>
-                                <option value="filler3">Filler 3</option>
-                                <option value="filler4">Filler 4</option>
-                                <option value="filler5">Filler 5</option>
+                                <option value="Inquiry">Inquiry</option>
+                                <option value="Event">Event</option>
+                                <option value="Photoshoot">Photoshoot</option>
+                                <option value="Video Production">Video Production</option>
+                                <!-- <option value="filler4">Filler 4</option> -->
+                                <!-- <option value="filler5">Filler 5</option> -->
                             </select>
                         </div>
                     </div>
@@ -107,5 +108,31 @@
     </footer>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="scripts/contact.js"></script>
+    <script>
+        $('#contact-form').submit(function(event) {
+            var data = { 
+                    firstName : $('#first-name').val(), 
+                    lastName : $('#last-name').val(), 
+                    email : $('#email').val(), 
+                    phoneNumber : $('#phone').val(),
+                    topic : $('#topic').val(),
+                    date : $('#date').val(),
+                    time : $('.tsp-active').text(),
+                    message : $('#message').val()
+                }
+            console.log(data)
+            $.ajax({
+                type: 'POST',
+                url: '/contact',
+                data: data
+            }).then(()=>{
+                // window.location.href = "/admin/dashboard";                
+            }).fail((error)=>{
+                console.error(error)
+                event.preventDefault();
+                alert('Error sending message, please try again')
+            });
+        })
+    </script>
 </body>
 </html>

@@ -22,26 +22,11 @@
 
 <div class="main-content">
     <div class="animate__animated animate__fadeIn intro-section">
-        <h1>DECOR GALLERY</h1>
-        <p>The quick brown fox jumps over the lazy yellow dog. The quick brown lorem ipsum jumps over the lazy yellow dolor sit.</p>
+        <h1><%=groupName%> Gallery</h1>
+        <!-- <p>The quick brown fox jumps over the lazy yellow dog. The quick brown lorem ipsum jumps over the lazy yellow dolor sit.</p> -->
     </div>
-    <div class="filter-section">
+    <!-- <div class="filter-section">
         <h3>Filters</h3>
-        <div class="filter-divider"></div>
-        <div class="filter-group-section">
-            <h4>Groups</h4>
-            <a onclick="showGroup()" class="filter-group-header">
-                <p>No filters applied</p>
-                <p>+</p>
-            </a>
-            <div id="group-content" class="filter-group-content">
-                <input  class="group-searchbox" placeholder="Search for a group..." type="text">
-                <label class="checkboxpls">
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>One
-                </label>
-            </div>
-        </div>
         <div class="filter-divider"></div>
         <div class="filter-group-section">
             <h4>Tags</h4>
@@ -50,14 +35,17 @@
                 <p>+</p>
             </a>
             <div id="tag-content" class="filter-group-content">
-                <input  class="group-searchbox" placeholder="Search for a group..." type="text">
-                <label class="checkboxpls">
+                <input id="tag-search-box" class="group-searchbox" placeholder="Search for a tag..." type="text">
+                <label id="tag-checkbox-section" class="checkboxpls">
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>One
+                    <br>
                     <input type="checkbox" checked="checked">
                     <span class="checkmark"></span>One
                 </label>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="pictures-sections">
         <div class="hoverEffect">
@@ -81,7 +69,8 @@
 <script>
     var count = 0;
     var data = []
-
+    const groupId = "<%= groupId %>"
+    console.log(groupId)
 </script>
 <script src="scripts/gallery.js"></script>
 
